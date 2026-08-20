@@ -1,0 +1,6 @@
+{
+  "name": "Rizqora Solutions",
+  "description": "Enterprise Global Language Solutions & AI Localization Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
