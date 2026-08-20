@@ -325,8 +325,8 @@ export const Globe3D: React.FC<Globe3DProps> = ({
 
   return (
     <div className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center select-none">
-      {/* Exact Circular Hero Visual Container */}
-      <div className="w-[76%] h-[76%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(228,3,46,0.25)] border border-red-500/20 bg-[#080A10] flex items-center justify-center relative">
+      {/* Globe Media Visual Container - Transparent, no black background disc */}
+      <div className="w-full h-full flex items-center justify-center relative">
         {!allFailed && currentSrc ? (
           <>
             {isVideo ? (
@@ -340,7 +340,7 @@ export const Globe3D: React.FC<Globe3DProps> = ({
                 playsInline
                 preload="auto"
                 onError={handleMediaError}
-                className="w-full h-full object-cover rounded-full scale-105"
+                className="w-full h-full object-contain select-none pointer-events-none"
               />
             ) : isImageOrGif ? (
               <img
@@ -348,14 +348,11 @@ export const Globe3D: React.FC<Globe3DProps> = ({
                 src={currentSrc}
                 alt={alt}
                 onError={handleMediaError}
-                className="w-full h-full object-cover rounded-full scale-105"
+                className="w-full h-full object-contain select-none pointer-events-none"
               />
             ) : (
               <CodedGlobe />
             )}
-
-            {/* Subtle cinematic vignette depth overlay */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
           </>
         ) : (
           /* Coded Canvas Globe strictly rendered ONLY when media is absent or errored */
