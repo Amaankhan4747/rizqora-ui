@@ -341,7 +341,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
       'SOC-2 Type II certified secure data environment',
       'Specialized financial linguists and auditors',
     ],
-    stat: '$1.2B+',
+    stat: '₹1.2B+',
     statLabel: 'Transactions processed daily on localized banking UI',
   },
   {

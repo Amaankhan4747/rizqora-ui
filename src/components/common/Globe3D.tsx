@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface CityNode {
   name: string;
@@ -70,12 +70,41 @@ function isLandDot(lat: number, lng: number): boolean {
   return false;
 }
 
-export const Globe3D: React.FC = () => {
+export interface Globe3DProps {
+  mediaSrc?: string;
+  alt?: string;
+}
+
+export const Globe3D: React.FC<Globe3DProps> = ({
+  mediaSrc = '/assets/videos/globe.mp4',
+  alt = 'Interactive Globe Visual',
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const rotationRef = useRef<number>(0.4);
   const isDraggingRef = useRef<boolean>(false);
   const lastMouseXRef = useRef<number>(0);
+  const [videoError, setVideoError] = useState<boolean>(false);
+
+  const cleanSrc = mediaSrc.split('?')[0].toLowerCase();
+  const isGif = cleanSrc.endsWith('.gif');
+  const isImage =
+    cleanSrc.endsWith('.png') ||
+    cleanSrc.endsWith('.jpg') ||
+    cleanSrc.endsWith('.jpeg') ||
+    cleanSrc.endsWith('.webp') ||
+    cleanSrc.endsWith('.svg') ||
+    cleanSrc.endsWith('.avif');
+  const isVideo = !isGif && !isImage;
+
+  useEffect(() => {
+    if (isVideo && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback handling
+      });
+    }
+  }, [isVideo, mediaSrc]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -100,8 +129,8 @@ export const Globe3D: React.FC = () => {
     observer.observe(container);
 
     // Generate lat/lng grid dots
-    const numLat = 42;
-    const numLng = 84;
+    const numLat = 36;
+    const numLng = 72;
     const dots: { x: number; y: number; z: number; isLand: boolean }[] = [];
 
     for (let i = 0; i < numLat; i++) {
@@ -123,7 +152,6 @@ export const Globe3D: React.FC = () => {
       }
     }
 
-    // Convert lat/lng to 3D point on unit sphere
     const latLngTo3D = (latDeg: number, lngDeg: number) => {
       const lat = (latDeg * Math.PI) / 180;
       const lng = (lngDeg * Math.PI) / 180;
@@ -152,7 +180,7 @@ export const Globe3D: React.FC = () => {
         return;
       }
 
-      const radius = Math.min(width, height) * 0.40;
+      const radius = Math.min(width, height) * 0.38;
       const centerX = width / 2;
       const centerY = height / 2;
 
@@ -161,18 +189,15 @@ export const Globe3D: React.FC = () => {
       const rot = rotationRef.current;
       const cosRot = Math.cos(rot);
       const sinRot = Math.sin(rot);
-      const tilt = 0.24; // Tilt angle (~14 degrees)
+      const tilt = 0.22;
       const cosT = Math.cos(tilt);
       const sinT = Math.sin(tilt);
 
-      // Transform 3D point helper
       const transform = (p: { x: number; y: number; z: number }) => {
-        // Y-axis rotation
         const rx = p.x * cosRot + p.z * sinRot;
         const ry = p.y;
         const rz = -p.x * sinRot + p.z * cosRot;
 
-        // X-axis tilt
         const finalY = ry * cosT - rz * sinT;
         const finalZ = ry * sinT + rz * cosT;
 
@@ -186,36 +211,18 @@ export const Globe3D: React.FC = () => {
         };
       };
 
-      // 1. Floating Drop Shadow underneath Globe on floor
-      const shadowY = centerY + radius * 1.12;
-      const shadowGrad = ctx.createRadialGradient(
-        centerX, shadowY, 0,
-        centerX, shadowY, radius * 0.85
-      );
-      shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.45)');
-      shadowGrad.addColorStop(0.4, 'rgba(0, 0, 0, 0.25)');
-      shadowGrad.addColorStop(0.8, 'rgba(0, 0, 0, 0.05)');
-      shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(centerX, shadowY, radius * 0.75, radius * 0.14, 0, 0, Math.PI * 2);
-      ctx.fillStyle = shadowGrad;
-      ctx.fill();
-      ctx.restore();
-
-      // 2. Outer Red Atmospheric Glow Halo
+      // 1. Outer Atmospheric Red Halo
       const outerHalo = ctx.createRadialGradient(
         centerX,
         centerY,
-        radius * 0.82,
+        radius * 0.85,
         centerX,
         centerY,
         radius * 1.35
       );
-      outerHalo.addColorStop(0, 'rgba(228, 3, 46, 0.28)');
-      outerHalo.addColorStop(0.35, 'rgba(228, 3, 46, 0.12)');
-      outerHalo.addColorStop(0.7, 'rgba(228, 3, 46, 0.03)');
+      outerHalo.addColorStop(0, 'rgba(228, 3, 46, 0.25)');
+      outerHalo.addColorStop(0.4, 'rgba(228, 3, 46, 0.10)');
+      outerHalo.addColorStop(0.8, 'rgba(228, 3, 46, 0.02)');
       outerHalo.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
       ctx.fillStyle = outerHalo;
@@ -223,141 +230,52 @@ export const Globe3D: React.FC = () => {
       ctx.arc(centerX, centerY, radius * 1.35, 0, Math.PI * 2);
       ctx.fill();
 
-      // 3. Realistic Dark Glossy Sphere Surface Base
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-
-      // Deep obsidian sphere base with glossy reflection
-      const sphereGrad = ctx.createRadialGradient(
-        centerX + radius * 0.35,
-        centerY - radius * 0.4,
-        radius * 0.05,
-        centerX,
-        centerY,
-        radius
-      );
-      sphereGrad.addColorStop(0, '#2b3242');
-      sphereGrad.addColorStop(0.2, '#181e2b');
-      sphereGrad.addColorStop(0.65, '#0c0f17');
-      sphereGrad.addColorStop(0.95, '#05060a');
-      sphereGrad.addColorStop(1, '#020305');
-
-      ctx.fillStyle = sphereGrad;
-      ctx.fill();
-
-      // Curved specular glossy reflection arc on top right
-      const glossGrad = ctx.createLinearGradient(
-        centerX - radius * 0.5,
-        centerY - radius * 0.8,
-        centerX + radius * 0.8,
-        centerY + radius * 0.5
-      );
-      glossGrad.addColorStop(0, 'rgba(255, 255, 255, 0.25)');
-      glossGrad.addColorStop(0.25, 'rgba(255, 255, 255, 0.08)');
-      glossGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0)');
-
-      ctx.fillStyle = glossGrad;
-      ctx.fill();
-      ctx.restore();
-
-      // 4. Render Background Grid Dots (Z < 0)
+      // 2. Foreground Red Accent Dots on active regions
       dots.forEach((dot) => {
         const pt = transform(dot);
-        if (pt.pz < 0) {
-          if (dot.isLand) {
-            const alpha = Math.max(0.05, 0.18 * (1 + pt.pz));
-            ctx.fillStyle = `rgba(120, 135, 155, ${alpha})`;
+        if (pt.pz >= 0 && dot.isLand) {
+          const isRedAccent = Math.sin(dot.x * 12 + dot.y * 8 + dot.z * 15) > 0.78;
+          if (isRedAccent) {
+            const alpha = 0.4 + 0.6 * pt.pz;
+            ctx.fillStyle = `rgba(228, 3, 46, ${alpha})`;
+            ctx.shadowColor = '#E4032E';
+            ctx.shadowBlur = 4;
             ctx.beginPath();
-            ctx.arc(pt.px, pt.py, 1.0, 0, Math.PI * 2);
+            ctx.arc(pt.px, pt.py, 1.8, 0, Math.PI * 2);
             ctx.fill();
+            ctx.shadowBlur = 0;
           }
         }
       });
 
-      // 5. Render Background Connections (Z < 0)
-      CONNECTIONS.forEach(([i, j]) => {
-        const p1 = transform(city3D[i]);
-        const p2 = transform(city3D[j]);
-        if (p1.pz < 0 || p2.pz < 0) {
-          ctx.beginPath();
-          ctx.moveTo(p1.px, p1.py);
-          const midX = (p1.px + p2.px) / 2;
-          const midY = (p1.py + p2.py) / 2 - 15;
-          ctx.quadraticCurveTo(midX, midY, p2.px, p2.py);
-          ctx.strokeStyle = 'rgba(228, 3, 46, 0.12)';
-          ctx.lineWidth = 1;
-          ctx.setLineDash([3, 4]);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        }
-      });
-
-      // 6. Render Foreground Dots (Z >= 0)
-      dots.forEach((dot) => {
-        const pt = transform(dot);
-        if (pt.pz >= 0) {
-          if (dot.isLand) {
-            // Bright high-contrast metallic dots on land
-            const alpha = 0.35 + 0.65 * pt.pz;
-            // Red glowing accent dots scattered across active regions
-            const isRedAccent = (Math.sin(dot.x * 12 + dot.y * 8 + dot.z * 15) > 0.82);
-
-            if (isRedAccent) {
-              ctx.fillStyle = `rgba(228, 3, 46, ${alpha})`;
-              ctx.shadowColor = '#E4032E';
-              ctx.shadowBlur = 4;
-              ctx.beginPath();
-              ctx.arc(pt.px, pt.py, 1.8, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.shadowBlur = 0;
-            } else {
-              ctx.fillStyle = `rgba(215, 225, 240, ${alpha})`;
-              ctx.beginPath();
-              ctx.arc(pt.px, pt.py, 1.4, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          } else {
-            // Subtle ocean grid dots for depth
-            const alpha = 0.08 * pt.pz;
-            ctx.fillStyle = `rgba(80, 100, 125, ${alpha})`;
-            ctx.beginPath();
-            ctx.arc(pt.px, pt.py, 0.9, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-      });
-
-      // 7. Render Foreground Glowing Arcs & Light Pulses (Z >= 0)
+      // 3. Foreground Curved Flight Arcs & Pulses
       CONNECTIONS.forEach(([i, j], idx) => {
         const p1 = transform(city3D[i]);
         const p2 = transform(city3D[j]);
 
         if (p1.pz >= 0 && p2.pz >= 0) {
-          // Calculate 3D elevated arc midpoint
           const midX = (p1.px + p2.px) / 2;
           const dist = Math.hypot(p2.px - p1.px, p2.py - p1.py);
-          const arcElevation = Math.min(dist * 0.35, 45);
+          const arcElevation = Math.min(dist * 0.32, 40);
           const midY = (p1.py + p2.py) / 2 - arcElevation;
 
-          // Arc stroke line with red gradient
           ctx.beginPath();
           ctx.moveTo(p1.px, p1.py);
           ctx.quadraticCurveTo(midX, midY, p2.px, p2.py);
 
           const arcGrad = ctx.createLinearGradient(p1.px, p1.py, p2.px, p2.py);
           arcGrad.addColorStop(0, 'rgba(228, 3, 46, 0.85)');
-          arcGrad.addColorStop(0.5, 'rgba(255, 140, 150, 0.95)');
+          arcGrad.addColorStop(0.5, 'rgba(255, 160, 170, 0.95)');
           arcGrad.addColorStop(1, 'rgba(228, 3, 46, 0.85)');
 
           ctx.strokeStyle = arcGrad;
-          ctx.lineWidth = 2.0;
+          ctx.lineWidth = 1.8;
           ctx.shadowColor = '#E4032E';
-          ctx.shadowBlur = 6;
+          ctx.shadowBlur = 5;
           ctx.stroke();
           ctx.shadowBlur = 0;
 
-          // Flowing Light Pulse particle traveling along curve
+          // Pulse particle
           const progress = (time * 0.5 + idx * 0.15) % 1;
           const pulseX =
             (1 - progress) * (1 - progress) * p1.px +
@@ -369,96 +287,92 @@ export const Globe3D: React.FC = () => {
             progress * progress * p2.py;
 
           ctx.beginPath();
-          ctx.arc(pulseX, pulseY, 3.2, 0, Math.PI * 2);
+          ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
           ctx.fillStyle = '#FFFFFF';
-          ctx.shadowColor = '#E4032E';
-          ctx.shadowBlur = 10;
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      });
-
-      // 8. Render Foreground City Nodes & Pinned Callout Labels
-      CITIES.forEach((city, idx) => {
-        const pt = transform(city3D[idx]);
-        if (pt.pz >= 0) {
-          const pulseScale = Math.sin(time * 3 + idx) * 0.25 + 1.15;
-
-          // Outer glowing red ring
-          ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 7 * pulseScale, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(228, 3, 46, 0.35)';
-          ctx.fill();
-
-          // Inner solid red node
-          ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = '#E4032E';
           ctx.shadowColor = '#E4032E';
           ctx.shadowBlur = 8;
           ctx.fill();
           ctx.shadowBlur = 0;
+        }
+      });
 
-          // White center pin core
+      // 4. Foreground City Hub Markers & Pin Callouts
+      CITIES.forEach((city, idx) => {
+        const pt = transform(city3D[idx]);
+        if (pt.pz >= 0) {
+          const pulseScale = Math.sin(time * 3 + idx) * 0.2 + 1.1;
+
+          // Outer halo
           ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 1.4, 0, Math.PI * 2);
+          ctx.arc(pt.px, pt.py, 6.5 * pulseScale, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(228, 3, 46, 0.3)';
+          ctx.fill();
+
+          // Inner dot
+          ctx.beginPath();
+          ctx.arc(pt.px, pt.py, 3, 0, Math.PI * 2);
+          ctx.fillStyle = '#E4032E';
+          ctx.shadowColor = '#E4032E';
+          ctx.shadowBlur = 6;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          // White center
+          ctx.beginPath();
+          ctx.arc(pt.px, pt.py, 1.2, 0, Math.PI * 2);
           ctx.fillStyle = '#FFFFFF';
           ctx.fill();
 
-          // Pinned Location Text Callouts (for prominent cities when visible)
-          if (pt.pz > 0.35 && ['New York', 'London', 'Tokyo', 'Sydney', 'Paris', 'Dubai'].includes(city.name)) {
+          // Prominent city pin callouts
+          if (pt.pz > 0.38 && ['New York', 'London', 'Tokyo', 'Sydney', 'Paris', 'Dubai'].includes(city.name)) {
             const isRight = pt.px > centerX;
-            const offsetX = isRight ? 16 : -16;
+            const offsetX = isRight ? 14 : -14;
             const labelX = pt.px + offsetX;
-            const labelY = pt.py - 16;
+            const labelY = pt.py - 14;
 
-            // Pin Line
             ctx.beginPath();
             ctx.moveTo(pt.px, pt.py);
             ctx.lineTo(labelX, labelY);
-            ctx.strokeStyle = 'rgba(228, 3, 46, 0.8)';
+            ctx.strokeStyle = 'rgba(228, 3, 46, 0.7)';
             ctx.lineWidth = 1;
             ctx.stroke();
 
-            // Badge Background Box
             const nameText = city.name;
             const countryText = city.country;
-            ctx.font = '700 11px "Space Grotesk", sans-serif';
+            ctx.font = '700 10px "Space Grotesk", sans-serif';
             const nameWidth = ctx.measureText(nameText).width;
-            ctx.font = '500 9px "Plus Jakarta Sans", sans-serif';
+            ctx.font = '500 8px "Plus Jakarta Sans", sans-serif';
             const countryWidth = ctx.measureText(countryText).width;
-            const boxWidth = Math.max(nameWidth, countryWidth) + 14;
-            const boxHeight = 28;
+            const boxWidth = Math.max(nameWidth, countryWidth) + 12;
+            const boxHeight = 24;
             const boxX = isRight ? labelX : labelX - boxWidth;
-            const boxY = labelY - 14;
+            const boxY = labelY - 12;
 
-            // Glass badge box
-            ctx.fillStyle = 'rgba(12, 16, 26, 0.88)';
-            ctx.strokeStyle = 'rgba(228, 3, 46, 0.4)';
+            ctx.fillStyle = 'rgba(10, 14, 24, 0.85)';
+            ctx.strokeStyle = 'rgba(228, 3, 46, 0.35)';
             ctx.lineWidth = 1;
 
             ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 6);
+            ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 5);
             ctx.fill();
             ctx.stroke();
 
-            // Text
             ctx.fillStyle = '#FFFFFF';
-            ctx.font = '700 11px "Space Grotesk", sans-serif';
-            ctx.fillText(nameText, boxX + 7, boxY + 11);
+            ctx.font = '700 10px "Space Grotesk", sans-serif';
+            ctx.fillText(nameText, boxX + 6, boxY + 10);
 
-            ctx.fillStyle = 'rgba(200, 210, 225, 0.75)';
-            ctx.font = '500 9px "Plus Jakarta Sans", sans-serif';
-            ctx.fillText(countryText, boxX + 7, boxY + 22);
+            ctx.fillStyle = 'rgba(200, 215, 235, 0.7)';
+            ctx.font = '500 8px "Plus Jakarta Sans", sans-serif';
+            ctx.fillText(countryText, boxX + 6, boxY + 19);
           }
         }
       });
 
-      // 9. Glossy Outer Rim Ring Highlight
+      // 5. Glossy Rim Ring
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(228, 3, 46, 0.25)';
+      ctx.lineWidth = 1.2;
       ctx.stroke();
 
       animFrameId = requestAnimationFrame(render);
@@ -493,13 +407,56 @@ export const Globe3D: React.FC = () => {
       ref={containerRef}
       className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
     >
+      {/* 3D Earth Rotating Media Element (Video / GIF / Image) */}
+      <div className="absolute w-[76%] h-[76%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(228,3,46,0.3)] border border-red-500/20 bg-black flex items-center justify-center">
+        {isVideo && !videoError ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onError={() => setVideoError(true)}
+            className="w-full h-full object-cover rounded-full scale-105"
+          >
+            {mediaSrc && <source src={mediaSrc} type={cleanSrc.endsWith('.webm') ? 'video/webm' : cleanSrc.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />}
+            <source src="/assets/videos/globe.mp4" type="video/mp4" />
+            <source src="assets/videos/globe.mp4" type="video/mp4" />
+            <source src="/assets/videos/globe.webm" type="video/webm" />
+          </video>
+        ) : isGif ? (
+          <img
+            src={mediaSrc || '/assets/gifs/globe.gif'}
+            alt={alt}
+            className="w-full h-full object-cover rounded-full scale-105"
+            onError={(e) => {
+              // Fallback to static image if gif path isn't found
+              (e.currentTarget as HTMLImageElement).src = '/assets/images/globe.png';
+            }}
+          />
+        ) : (
+          <img
+            src={videoError ? '/assets/gifs/globe.gif' : mediaSrc || '/assets/images/globe.png'}
+            alt={alt}
+            className="w-full h-full object-cover rounded-full scale-105"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = '/assets/images/globe.png';
+            }}
+          />
+        )}
+        {/* Dark cinematic vignette overlay */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+      </div>
+
+      {/* Interactive Global Network & Flight Lines Canvas Overlay */}
       <canvas
         ref={canvasRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        className="w-full h-full block"
+        className="w-full h-full block absolute inset-0 z-10"
       />
     </div>
   );

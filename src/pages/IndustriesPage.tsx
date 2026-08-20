@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PageId } from '../types';
 import { INDUSTRIES_DATA } from '../data/mockData';
 import { IconHelper } from '../components/common/IconHelper';
 import { ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 interface IndustriesPageProps {
-  onNavigate: (page: PageId, detailId?: string) => void;
+  onNavigate?: (page: PageId, detailId?: string) => void;
   selectedDetailId?: string;
 }
 
 export const IndustriesPage: React.FC<IndustriesPageProps> = ({
-  onNavigate,
   selectedDetailId,
 }) => {
   const [activeTab, setActiveTab] = useState(selectedDetailId || INDUSTRIES_DATA[0].id);
@@ -37,9 +37,9 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {INDUSTRIES_DATA.map((ind) => (
-            <button
+            <Link
               key={ind.id}
-              onClick={() => setActiveTab(ind.id)}
+              to={`/industries/${ind.id}`}
               className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
                 activeTab === ind.id
                   ? 'bg-[#E4032E] text-white shadow-md shadow-red-500/20'
@@ -48,7 +48,7 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
             >
               <IconHelper name={ind.iconName} size={16} />
               <span>{ind.name}</span>
-            </button>
+            </Link>
           ))}
         </div>
 
@@ -101,7 +101,7 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
                 <ul className="space-y-2 text-xs text-slate-300">
                   {activeIndustry.solutionHighlights.map((s, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
                       <span>{s}</span>
                     </li>
                   ))}
@@ -109,30 +109,32 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
               </div>
             </div>
 
-            <div className="pt-4">
-              <button
-                onClick={() => onNavigate('quote')}
-                className="bg-[#E4032E] hover:bg-[#c30226] text-white px-6 py-3 rounded-xl text-xs font-bold shadow-md flex items-center gap-2 cursor-pointer"
+            <div className="pt-4 flex items-center gap-4">
+              <Link
+                to={`/industries/${activeIndustry.id}`}
+                className="bg-[#E4032E] hover:bg-[#c30226] text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-red-600/30 transition-all"
               >
-                <span>Request {activeIndustry.name} Quote</span>
+                <span>View Dedicated {activeIndustry.name} Page</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
             </div>
           </div>
 
           {/* Right Stat Callout Box */}
-          <div className="lg:col-span-5 relative z-10 flex flex-col items-center justify-center p-8 bg-slate-950 rounded-2xl border border-slate-800 text-center space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              PROVEN INDUSTRY IMPACT
-            </span>
-            <div className="text-6xl font-black text-[#E4032E] font-['Space_Grotesk'] tracking-tight">
-              {activeIndustry.stat}
-            </div>
-            <div className="text-sm font-bold text-white max-w-xs">
-              {activeIndustry.statLabel}
-            </div>
-            <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-800 w-full">
-              Verified benchmark result across Rizqora client implementations.
+          <div className="lg:col-span-5 relative z-10 flex justify-center">
+            <div className="p-8 bg-slate-950 rounded-3xl border border-slate-800 text-center space-y-3 max-w-sm w-full">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                PROVEN INDUSTRY IMPACT
+              </span>
+              <div className="text-6xl font-black text-[#E4032E] font-['Space_Grotesk'] tracking-tight">
+                {activeIndustry.stat}
+              </div>
+              <div className="text-sm font-bold text-white">
+                {activeIndustry.statLabel}
+              </div>
+              <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-800">
+                Verified benchmark across Rizqora client implementations.
+              </div>
             </div>
           </div>
         </div>

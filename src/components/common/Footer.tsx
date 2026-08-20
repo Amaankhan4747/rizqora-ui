@@ -1,286 +1,125 @@
-import React, { useState } from 'react';
-import { PageId } from '../../types';
-import { ArrowRight, Globe, CheckCircle, Linkedin, Twitter, Facebook, Youtube, Instagram } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SERVICES_DATA, INDUSTRIES_DATA } from '../../data/mockData';
+import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from 'lucide-react';
 
-interface FooterProps {
-  onNavigate: (page: PageId, detailId?: string) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 4000);
-      setNewsletterEmail('');
-    }
-  };
+export const Footer: React.FC = () => {
+  const getServiceSlug = (id: string) => (id === 'lqa' ? 'linguistic-quality-assurance' : id);
 
   return (
-    <footer className="bg-[#0A0A0A] text-white pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-[#090C15] text-white pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top 5-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+          
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center border border-white/20">
-                <div className="w-4 h-4 border-2 border-white rounded rotate-45 flex items-center justify-center relative">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E4032E] absolute -top-1 -right-1" />
+            <Link to="/" className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center">
+                <div className="w-5 h-5 border-2 border-black rounded-md rotate-45 flex items-center justify-center relative">
+                  <span className="w-2 h-2 rounded-full bg-[#E4032E] absolute -top-1 -right-1" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-black" />
                 </div>
               </div>
-              <span className="text-xl font-extrabold tracking-tight text-white font-['Space_Grotesk']">
-                Rizqora<span className="text-[#E4032E]">.</span> Solutions
-              </span>
-            </div>
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Building a world where language turns possibilities into global business with no limits. Next-generation Global Language Solutions & AI Localization.
+              <div className="flex flex-col">
+                <span className="text-xl font-extrabold tracking-tight text-white font-['Space_Grotesk'] leading-none">
+                  Rizqora<span className="text-[#E4032E]">.</span>
+                </span>
+                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-tight">
+                  Solutions
+                </span>
+              </div>
+            </Link>
+
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+              Global enterprise language & AI solutions powered by certified native linguists and proprietary neural translation infrastructure.
             </p>
 
-            <div className="pt-2 flex items-center gap-3 text-xs text-slate-400">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                24/7 Global Infrastructure
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800">
-                ISO 17100 & SOC-2 Certified
-              </span>
+            <div className="pt-2 text-xs text-slate-400 space-y-2">
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#E4032E]" />
+                <span>enterprise@rizqorasolutions.com</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#E4032E]" />
+                <span>Global Offices: Singapore · London · New York · Dubai</span>
+              </div>
             </div>
           </div>
 
-          {/* Solutions Column */}
+          {/* Solutions Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#E4032E]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-['Space_Grotesk']">
               Solutions
             </h4>
-            <ul className="space-y-2 text-sm text-slate-300">
+            <ul className="space-y-2 text-xs text-slate-400">
+              {SERVICES_DATA.slice(0, 6).map((s) => (
+                <li key={s.id}>
+                  <Link
+                    to={`/solutions/${getServiceSlug(s.id)}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {s.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <button
-                  onClick={() => onNavigate('services', 'translation')}
-                  className="hover:text-white transition-colors"
-                >
-                  Translation
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('services', 'localization')}
-                  className="hover:text-white transition-colors"
-                >
-                  Localization
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('services', 'ai-data-annotation')}
-                  className="hover:text-white transition-colors"
-                >
-                  AI Data Annotation
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('services', 'mtpe')}
-                  className="hover:text-white transition-colors"
-                >
-                  MT Post Editing
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('services', 'lqa')}
-                  className="hover:text-white transition-colors"
-                >
-                  Linguistic QA
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('services')}
-                  className="text-xs text-[#E4032E] font-bold hover:underline"
-                >
-                  View All 10 Services →
-                </button>
+                <Link to="/solutions" className="text-[#E4032E] font-semibold flex items-center gap-1 pt-1">
+                  All 10 Solutions <ArrowRight className="w-3 h-3" />
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Industries & Resources Column */}
+          {/* Industries Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#E4032E]">
-              Explore
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-['Space_Grotesk']">
+              Industries
             </h4>
-            <ul className="space-y-2 text-sm text-slate-300">
+            <ul className="space-y-2 text-xs text-slate-400">
+              {INDUSTRIES_DATA.slice(0, 6).map((ind) => (
+                <li key={ind.id}>
+                  <Link
+                    to={`/industries/${ind.id}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {ind.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <button
-                  onClick={() => onNavigate('industries')}
-                  className="hover:text-white transition-colors"
-                >
-                  Industries Served
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('languages')}
-                  className="hover:text-white transition-colors"
-                >
-                  Languages (1,000+)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('technology')}
-                  className="hover:text-white transition-colors"
-                >
-                  Technology Stack
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('ai-solutions')}
-                  className="hover:text-white transition-colors"
-                >
-                  AI Solutions Hub
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('case-studies')}
-                  className="hover:text-white transition-colors"
-                >
-                  Case Studies
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('blog')}
-                  className="hover:text-white transition-colors"
-                >
-                  Blog & Insights
-                </button>
+                <Link to="/industries" className="text-[#E4032E] font-semibold flex items-center gap-1 pt-1">
+                  All Industries <ArrowRight className="w-3 h-3" />
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Stay Connected Column */}
+          {/* Company & Resources */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#E4032E]">
-              Stay Connected
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-['Space_Grotesk']">
+              Company
             </h4>
-            <p className="text-xs text-slate-400">
-              Subscribe to our newsletter for insights on AI localization, global growth, and MTPE trends.
-            </p>
-
-            <form onSubmit={handleSubscribe} className="space-y-2">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#E4032E] transition-colors pr-9"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#E4032E] hover:bg-[#c30226] text-white rounded-md flex items-center justify-center transition-colors"
-                >
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {subscribed && (
-                <div className="text-[11px] text-emerald-400 flex items-center gap-1 font-semibold animate-in fade-in">
-                  <CheckCircle className="w-3.5 h-3.5" /> Subscribed successfully!
-                </div>
-              )}
-            </form>
-
-            <div className="pt-2 flex items-center space-x-3 text-slate-400">
-              <a
-                href="#linkedin"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-[#E4032E] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#twitter"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-[#E4032E] transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href="#facebook"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-[#E4032E] transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#youtube"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-[#E4032E] transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a
-                href="#instagram"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-[#E4032E] transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-            </div>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/technology" className="hover:text-white transition-colors">Technology & AI</Link></li>
+              <li><Link to="/resources" className="hover:text-white transition-colors">Resources & Blog</Link></li>
+              <li><Link to="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact Support</Link></li>
+              <li><Link to="/quote" className="text-[#E4032E] font-bold">Request Instant Quote</Link></li>
+            </ul>
           </div>
         </div>
 
-        {/* Company Links & Bottom Legal Row */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        {/* Bottom copyright & legal */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © 2026 Rizqora Solutions Inc. All rights reserved.
+            © {new Date().getFullYear()} Rizqora Solutions Inc. All rights reserved. ISO 17100:2015 & ISO 9001:2015 Certified.
           </div>
-
-          <div className="flex flex-wrap items-center gap-6">
-            <button
-              onClick={() => onNavigate('about')}
-              className="hover:text-white transition-colors"
-            >
-              About Company
-            </button>
-            <button
-              onClick={() => onNavigate('careers')}
-              className="hover:text-white transition-colors"
-            >
-              Careers
-            </button>
-            <button
-              onClick={() => onNavigate('contact')}
-              className="hover:text-white transition-colors"
-            >
-              Contact
-            </button>
-            <button
-              onClick={() => onNavigate('privacy')}
-              className="hover:text-white transition-colors"
-            >
-              Privacy Policy
-            </button>
-            <button
-              onClick={() => onNavigate('terms')}
-              className="hover:text-white transition-colors"
-            >
-              Terms of Service
-            </button>
+          <div className="flex items-center gap-6">
+            <Link to="/privacy" className="hover:text-slate-300">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-slate-300">Terms of Service</Link>
+            <Link to="/quote" className="hover:text-slate-300">Client Portal</Link>
           </div>
         </div>
       </div>
