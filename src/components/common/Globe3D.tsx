@@ -1,40 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-interface CityNode {
-  name: string;
-  country: string;
-  lat: number;
-  lng: number;
-}
-
-const CITIES: CityNode[] = [
-  { name: 'New York', country: 'USA', lat: 40.7128, lng: -74.006 },
-  { name: 'London', country: 'United Kingdom', lat: 51.5074, lng: -0.1278 },
-  { name: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503 },
-  { name: 'Sydney', country: 'Australia', lat: -33.8688, lng: 151.2093 },
-  { name: 'Dubai', country: 'UAE', lat: 25.2048, lng: 55.2708 },
-  { name: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198 },
-  { name: 'San Francisco', country: 'USA', lat: 37.7749, lng: -122.4194 },
-  { name: 'Paris', country: 'France', lat: 48.8566, lng: 2.3522 },
-  { name: 'São Paulo', country: 'Brazil', lat: -23.5505, lng: -46.6333 },
-  { name: 'Berlin', country: 'Germany', lat: 52.52, lng: 13.405 },
-];
-
-const CONNECTIONS: [number, number][] = [
-  [0, 1], // New York - London
-  [1, 2], // London - Tokyo
-  [2, 3], // Tokyo - Sydney
-  [1, 4], // London - Dubai
-  [4, 5], // Dubai - Singapore
-  [0, 6], // NY - SF
-  [6, 2], // SF - Tokyo
-  [1, 7], // London - Paris
-  [0, 8], // NY - Sao Paulo
-  [7, 9], // Paris - Berlin
-  [9, 4], // Berlin - Dubai
-  [5, 3], // Singapore - Sydney
-];
-
 // Landmass detection for globe dot matrix
 function isLandDot(lat: number, lng: number): boolean {
   // North America
@@ -56,7 +21,7 @@ function isLandDot(lat: number, lng: number): boolean {
   }
   // Asia
   if (lat >= 5 && lat <= 75 && lng >= 45 && lng <= 145) {
-    if (lat < 20 && lng > 105 && lng < 118) return false; // Gulf/Sea
+    if (lat < 20 && lng > 105 && lng < 118) return false;
     return true;
   }
   // Australia / NZ
@@ -70,41 +35,17 @@ function isLandDot(lat: number, lng: number): boolean {
   return false;
 }
 
-export interface Globe3DProps {
-  mediaSrc?: string;
-  alt?: string;
-}
-
-export const Globe3D: React.FC<Globe3DProps> = ({
-  mediaSrc = '/assets/videos/globe.mp4',
-  alt = 'Interactive Globe Visual',
-}) => {
+/**
+ * Clean, Coded 3D Canvas Globe Component
+ * Serves as the high-fidelity fallback when no external media is configured or if media fails to load.
+ * Clutter-free: No intrusive text markers, callout boxes, or excess decorative lines.
+ */
+export const CodedGlobe: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const rotationRef = useRef<number>(0.4);
   const isDraggingRef = useRef<boolean>(false);
   const lastMouseXRef = useRef<number>(0);
-  const [videoError, setVideoError] = useState<boolean>(false);
-
-  const cleanSrc = mediaSrc.split('?')[0].toLowerCase();
-  const isGif = cleanSrc.endsWith('.gif');
-  const isImage =
-    cleanSrc.endsWith('.png') ||
-    cleanSrc.endsWith('.jpg') ||
-    cleanSrc.endsWith('.jpeg') ||
-    cleanSrc.endsWith('.webp') ||
-    cleanSrc.endsWith('.svg') ||
-    cleanSrc.endsWith('.avif');
-  const isVideo = !isGif && !isImage;
-
-  useEffect(() => {
-    if (isVideo && videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay policy fallback handling
-      });
-    }
-  }, [isVideo, mediaSrc]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -128,9 +69,9 @@ export const Globe3D: React.FC<Globe3DProps> = ({
     const observer = new ResizeObserver(resize);
     observer.observe(container);
 
-    // Generate lat/lng grid dots
-    const numLat = 36;
-    const numLng = 72;
+    // Pre-calculate lat/lng grid dots for spherical projection
+    const numLat = 38;
+    const numLng = 76;
     const dots: { x: number; y: number; z: number; isLand: boolean }[] = [];
 
     for (let i = 0; i < numLat; i++) {
@@ -152,24 +93,9 @@ export const Globe3D: React.FC<Globe3DProps> = ({
       }
     }
 
-    const latLngTo3D = (latDeg: number, lngDeg: number) => {
-      const lat = (latDeg * Math.PI) / 180;
-      const lng = (lngDeg * Math.PI) / 180;
-      return {
-        x: Math.cos(lat) * Math.sin(lng),
-        y: -Math.sin(lat),
-        z: Math.cos(lat) * Math.cos(lng),
-      };
-    };
-
-    const city3D = CITIES.map((c) => latLngTo3D(c.lat, c.lng));
-
-    let time = 0;
-
     const render = () => {
-      time += 0.012;
       if (!isDraggingRef.current) {
-        rotationRef.current += 0.0035;
+        rotationRef.current += 0.003;
       }
 
       const rect = container.getBoundingClientRect();
@@ -180,7 +106,7 @@ export const Globe3D: React.FC<Globe3DProps> = ({
         return;
       }
 
-      const radius = Math.min(width, height) * 0.38;
+      const radius = Math.min(width, height) * 0.44;
       const centerX = width / 2;
       const centerY = height / 2;
 
@@ -189,7 +115,7 @@ export const Globe3D: React.FC<Globe3DProps> = ({
       const rot = rotationRef.current;
       const cosRot = Math.cos(rot);
       const sinRot = Math.sin(rot);
-      const tilt = 0.22;
+      const tilt = 0.2;
       const cosT = Math.cos(tilt);
       const sinT = Math.sin(tilt);
 
@@ -205,173 +131,75 @@ export const Globe3D: React.FC<Globe3DProps> = ({
           px: centerX + rx * radius,
           py: centerY + finalY * radius,
           pz: finalZ,
-          rx,
-          ry: finalY,
-          rz: finalZ,
         };
       };
 
-      // 1. Outer Atmospheric Red Halo
-      const outerHalo = ctx.createRadialGradient(
+      // 1. Clean Atmosphere Glow
+      const glow = ctx.createRadialGradient(
         centerX,
         centerY,
-        radius * 0.85,
+        radius * 0.75,
         centerX,
         centerY,
-        radius * 1.35
+        radius * 1.15
       );
-      outerHalo.addColorStop(0, 'rgba(228, 3, 46, 0.25)');
-      outerHalo.addColorStop(0.4, 'rgba(228, 3, 46, 0.10)');
-      outerHalo.addColorStop(0.8, 'rgba(228, 3, 46, 0.02)');
-      outerHalo.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      glow.addColorStop(0, 'rgba(228, 3, 46, 0.15)');
+      glow.addColorStop(0.5, 'rgba(228, 3, 46, 0.05)');
+      glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
-      ctx.fillStyle = outerHalo;
+      ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius * 1.35, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, radius * 1.15, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Foreground Red Accent Dots on active regions
-      dots.forEach((dot) => {
-        const pt = transform(dot);
-        if (pt.pz >= 0 && dot.isLand) {
-          const isRedAccent = Math.sin(dot.x * 12 + dot.y * 8 + dot.z * 15) > 0.78;
-          if (isRedAccent) {
-            const alpha = 0.4 + 0.6 * pt.pz;
-            ctx.fillStyle = `rgba(228, 3, 46, ${alpha})`;
-            ctx.shadowColor = '#E4032E';
-            ctx.shadowBlur = 4;
-            ctx.beginPath();
-            ctx.arc(pt.px, pt.py, 1.8, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-          }
-        }
-      });
+      // 2. Dark Globe Body Base
+      const sphereGrad = ctx.createRadialGradient(
+        centerX - radius * 0.3,
+        centerY - radius * 0.3,
+        radius * 0.1,
+        centerX,
+        centerY,
+        radius
+      );
+      sphereGrad.addColorStop(0, '#161922');
+      sphereGrad.addColorStop(0.7, '#0B0D14');
+      sphereGrad.addColorStop(1, '#05060A');
 
-      // 3. Foreground Curved Flight Arcs & Pulses
-      CONNECTIONS.forEach(([i, j], idx) => {
-        const p1 = transform(city3D[i]);
-        const p2 = transform(city3D[j]);
-
-        if (p1.pz >= 0 && p2.pz >= 0) {
-          const midX = (p1.px + p2.px) / 2;
-          const dist = Math.hypot(p2.px - p1.px, p2.py - p1.py);
-          const arcElevation = Math.min(dist * 0.32, 40);
-          const midY = (p1.py + p2.py) / 2 - arcElevation;
-
-          ctx.beginPath();
-          ctx.moveTo(p1.px, p1.py);
-          ctx.quadraticCurveTo(midX, midY, p2.px, p2.py);
-
-          const arcGrad = ctx.createLinearGradient(p1.px, p1.py, p2.px, p2.py);
-          arcGrad.addColorStop(0, 'rgba(228, 3, 46, 0.85)');
-          arcGrad.addColorStop(0.5, 'rgba(255, 160, 170, 0.95)');
-          arcGrad.addColorStop(1, 'rgba(228, 3, 46, 0.85)');
-
-          ctx.strokeStyle = arcGrad;
-          ctx.lineWidth = 1.8;
-          ctx.shadowColor = '#E4032E';
-          ctx.shadowBlur = 5;
-          ctx.stroke();
-          ctx.shadowBlur = 0;
-
-          // Pulse particle
-          const progress = (time * 0.5 + idx * 0.15) % 1;
-          const pulseX =
-            (1 - progress) * (1 - progress) * p1.px +
-            2 * (1 - progress) * progress * midX +
-            progress * progress * p2.px;
-          const pulseY =
-            (1 - progress) * (1 - progress) * p1.py +
-            2 * (1 - progress) * progress * midY +
-            progress * progress * p2.py;
-
-          ctx.beginPath();
-          ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
-          ctx.fillStyle = '#FFFFFF';
-          ctx.shadowColor = '#E4032E';
-          ctx.shadowBlur = 8;
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      });
-
-      // 4. Foreground City Hub Markers & Pin Callouts
-      CITIES.forEach((city, idx) => {
-        const pt = transform(city3D[idx]);
-        if (pt.pz >= 0) {
-          const pulseScale = Math.sin(time * 3 + idx) * 0.2 + 1.1;
-
-          // Outer halo
-          ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 6.5 * pulseScale, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(228, 3, 46, 0.3)';
-          ctx.fill();
-
-          // Inner dot
-          ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 3, 0, Math.PI * 2);
-          ctx.fillStyle = '#E4032E';
-          ctx.shadowColor = '#E4032E';
-          ctx.shadowBlur = 6;
-          ctx.fill();
-          ctx.shadowBlur = 0;
-
-          // White center
-          ctx.beginPath();
-          ctx.arc(pt.px, pt.py, 1.2, 0, Math.PI * 2);
-          ctx.fillStyle = '#FFFFFF';
-          ctx.fill();
-
-          // Prominent city pin callouts
-          if (pt.pz > 0.38 && ['New York', 'London', 'Tokyo', 'Sydney', 'Paris', 'Dubai'].includes(city.name)) {
-            const isRight = pt.px > centerX;
-            const offsetX = isRight ? 14 : -14;
-            const labelX = pt.px + offsetX;
-            const labelY = pt.py - 14;
-
-            ctx.beginPath();
-            ctx.moveTo(pt.px, pt.py);
-            ctx.lineTo(labelX, labelY);
-            ctx.strokeStyle = 'rgba(228, 3, 46, 0.7)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            const nameText = city.name;
-            const countryText = city.country;
-            ctx.font = '700 10px "Space Grotesk", sans-serif';
-            const nameWidth = ctx.measureText(nameText).width;
-            ctx.font = '500 8px "Plus Jakarta Sans", sans-serif';
-            const countryWidth = ctx.measureText(countryText).width;
-            const boxWidth = Math.max(nameWidth, countryWidth) + 12;
-            const boxHeight = 24;
-            const boxX = isRight ? labelX : labelX - boxWidth;
-            const boxY = labelY - 12;
-
-            ctx.fillStyle = 'rgba(10, 14, 24, 0.85)';
-            ctx.strokeStyle = 'rgba(228, 3, 46, 0.35)';
-            ctx.lineWidth = 1;
-
-            ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 5);
-            ctx.fill();
-            ctx.stroke();
-
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = '700 10px "Space Grotesk", sans-serif';
-            ctx.fillText(nameText, boxX + 6, boxY + 10);
-
-            ctx.fillStyle = 'rgba(200, 215, 235, 0.7)';
-            ctx.font = '500 8px "Plus Jakarta Sans", sans-serif';
-            ctx.fillText(countryText, boxX + 6, boxY + 19);
-          }
-        }
-      });
-
-      // 5. Glossy Rim Ring
+      ctx.fillStyle = sphereGrad;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(228, 3, 46, 0.25)';
+      ctx.fill();
+
+      // 3. Render Dot Matrix
+      dots.forEach((dot) => {
+        const pt = transform(dot);
+        // Only render visible hemisphere
+        if (pt.pz >= -0.05) {
+          const depthAlpha = Math.max(0, pt.pz);
+          
+          if (dot.isLand) {
+            // Land dot (Crisp white / silver with subtle red tint on highlight edges)
+            const alpha = 0.25 + 0.75 * depthAlpha;
+            ctx.fillStyle = `rgba(240, 243, 250, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(pt.px, pt.py, 1.4 + 0.6 * depthAlpha, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            // Ocean grid point (very subtle dark blue/slate)
+            if (depthAlpha > 0.4) {
+              ctx.fillStyle = `rgba(80, 100, 130, ${0.12 * depthAlpha})`;
+              ctx.beginPath();
+              ctx.arc(pt.px, pt.py, 0.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+      });
+
+      // 4. Subtle Globe Outer Rim
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(228, 3, 46, 0.35)';
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
@@ -405,59 +233,115 @@ export const Globe3D: React.FC<Globe3DProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      className="w-full h-full relative flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
     >
-      {/* 3D Earth Rotating Media Element (Video / GIF / Image) */}
-      <div className="absolute w-[76%] h-[76%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(228,3,46,0.3)] border border-red-500/20 bg-black flex items-center justify-center">
-        {isVideo && !videoError ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            onError={() => setVideoError(true)}
-            className="w-full h-full object-cover rounded-full scale-105"
-          >
-            {mediaSrc && <source src={mediaSrc} type={cleanSrc.endsWith('.webm') ? 'video/webm' : cleanSrc.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />}
-            <source src="/assets/videos/globe.mp4" type="video/mp4" />
-            <source src="assets/videos/globe.mp4" type="video/mp4" />
-            <source src="/assets/videos/globe.webm" type="video/webm" />
-          </video>
-        ) : isGif ? (
-          <img
-            src={mediaSrc || '/assets/gifs/globe.gif'}
-            alt={alt}
-            className="w-full h-full object-cover rounded-full scale-105"
-            onError={(e) => {
-              // Fallback to static image if gif path isn't found
-              (e.currentTarget as HTMLImageElement).src = '/assets/images/globe.png';
-            }}
-          />
-        ) : (
-          <img
-            src={videoError ? '/assets/gifs/globe.gif' : mediaSrc || '/assets/images/globe.png'}
-            alt={alt}
-            className="w-full h-full object-cover rounded-full scale-105"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = '/assets/images/globe.png';
-            }}
-          />
-        )}
-        {/* Dark cinematic vignette overlay */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-      </div>
+      <canvas ref={canvasRef} className="w-full h-full block" />
+    </div>
+  );
+};
 
-      {/* Interactive Global Network & Flight Lines Canvas Overlay */}
-      <canvas
-        ref={canvasRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        className="w-full h-full block absolute inset-0 z-10"
-      />
+export interface Globe3DProps {
+  /** Optional media asset source (video, gif, jpg, png, webp). If omitted or invalid, falls back to CodedGlobe */
+  mediaSrc?: string;
+  /** Accessible label */
+  alt?: string;
+}
+
+/**
+ * Universal Hero Visual Component (Single Source of Truth)
+ * 
+ * Strict Priority:
+ * 1. If valid mediaSrc exists -> Renders ONLY the media asset (video, gif, or image). CodedGlobe is NOT mounted.
+ * 2. If no mediaSrc OR media fails to load (onError) -> Renders ONLY the CodedGlobe fallback.
+ * 3. Never renders both simultaneously.
+ * 4. Clean presentation without cluttered markers, callout boxes, or distracting red dots.
+ */
+export const Globe3D: React.FC<Globe3DProps> = ({
+  mediaSrc = '/assets/videos/globe.mp4',
+  alt = 'Interactive Globe Visual',
+}) => {
+  const [hasError, setHasError] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Reset error state if mediaSrc changes
+  useEffect(() => {
+    setHasError(false);
+  }, [mediaSrc]);
+
+  // Determine media type
+  const cleanSrc = (mediaSrc || '').split('?')[0].toLowerCase().trim();
+  const hasConfiguredMedia = Boolean(cleanSrc && !hasError);
+
+  const isVideo =
+    cleanSrc.endsWith('.mp4') ||
+    cleanSrc.endsWith('.webm') ||
+    cleanSrc.endsWith('.mov') ||
+    cleanSrc.endsWith('.m4v');
+
+  const isImageOrGif =
+    cleanSrc.endsWith('.gif') ||
+    cleanSrc.endsWith('.png') ||
+    cleanSrc.endsWith('.jpg') ||
+    cleanSrc.endsWith('.jpeg') ||
+    cleanSrc.endsWith('.webp') ||
+    cleanSrc.endsWith('.svg') ||
+    cleanSrc.endsWith('.avif');
+
+  // Handle media load failure gracefully
+  const handleMediaError = () => {
+    setHasError(true);
+  };
+
+  useEffect(() => {
+    if (hasConfiguredMedia && isVideo && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Safe handling if browser autoplay policies require interaction
+      });
+    }
+  }, [hasConfiguredMedia, isVideo, mediaSrc]);
+
+  return (
+    <div className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center select-none">
+      {/* Exact Circular Hero Visual Container */}
+      <div className="w-[76%] h-[76%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(228,3,46,0.25)] border border-red-500/20 bg-[#080A10] flex items-center justify-center relative">
+        {hasConfiguredMedia ? (
+          <>
+            {isVideo ? (
+              <video
+                ref={videoRef}
+                src={mediaSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onError={handleMediaError}
+                className="w-full h-full object-cover rounded-full scale-105"
+              />
+            ) : isImageOrGif ? (
+              <img
+                src={mediaSrc}
+                alt={alt}
+                onError={handleMediaError}
+                className="w-full h-full object-cover rounded-full scale-105"
+              />
+            ) : (
+              // If format unrecognized, fall back to coded globe
+              <CodedGlobe />
+            )}
+
+            {/* Subtle cinematic vignette depth overlay */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+          </>
+        ) : (
+          /* Coded Canvas Globe strictly rendered ONLY when media is absent or errored */
+          <CodedGlobe />
+        )}
+      </div>
     </div>
   );
 };
