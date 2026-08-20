@@ -245,36 +245,52 @@ export const CodedGlobe: React.FC = () => {
 };
 
 export interface Globe3DProps {
-  /** Optional media asset source (video, gif, jpg, png, webp). If omitted or invalid, falls back to CodedGlobe */
+  /** Optional media asset source (video, gif, jpg, png, webp). If omitted or invalid, falls back to static candidates or CodedGlobe */
   mediaSrc?: string;
   /** Accessible label */
   alt?: string;
 }
 
+const DEFAULT_MEDIA_CANDIDATES = [
+  '/assets/gifs/globe.gif',
+  '/assets/videos/globe.mp4',
+  '/assets/images/globe.png',
+  '/assets/images/globe.webp',
+];
+
 /**
  * Universal Hero Visual Component (Single Source of Truth)
  * 
  * Strict Priority:
- * 1. If valid mediaSrc exists -> Renders ONLY the media asset (video, gif, or image). CodedGlobe is NOT mounted.
- * 2. If no mediaSrc OR media fails to load (onError) -> Renders ONLY the CodedGlobe fallback.
+ * 1. If valid mediaSrc or static asset (e.g. /assets/gifs/globe.gif) exists -> Renders ONLY the media asset (GIF, video, or image). CodedGlobe is NOT mounted.
+ * 2. If no media asset exists OR all candidates fail -> Renders ONLY the CodedGlobe fallback.
  * 3. Never renders both simultaneously.
  * 4. Clean presentation without cluttered markers, callout boxes, or distracting red dots.
  */
 export const Globe3D: React.FC<Globe3DProps> = ({
-  mediaSrc = '/assets/videos/globe.mp4',
+  mediaSrc,
   alt = 'Interactive Globe Visual',
 }) => {
-  const [hasError, setHasError] = useState<boolean>(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  // Reset error state if mediaSrc changes
-  useEffect(() => {
-    setHasError(false);
+  // Build ordered list of candidates to try
+  const candidateList = React.useMemo(() => {
+    if (mediaSrc) {
+      return [mediaSrc, ...DEFAULT_MEDIA_CANDIDATES.filter((c) => c !== mediaSrc)];
+    }
+    return DEFAULT_MEDIA_CANDIDATES;
   }, [mediaSrc]);
 
-  // Determine media type
-  const cleanSrc = (mediaSrc || '').split('?')[0].toLowerCase().trim();
-  const hasConfiguredMedia = Boolean(cleanSrc && !hasError);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [allFailed, setAllFailed] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Reset when mediaSrc changes
+  useEffect(() => {
+    setCurrentIndex(0);
+    setAllFailed(false);
+  }, [mediaSrc]);
+
+  const currentSrc = candidateList[currentIndex] || '';
+  const cleanSrc = currentSrc.split('?')[0].toLowerCase().trim();
 
   const isVideo =
     cleanSrc.endsWith('.mp4') ||
@@ -291,29 +307,33 @@ export const Globe3D: React.FC<Globe3DProps> = ({
     cleanSrc.endsWith('.svg') ||
     cleanSrc.endsWith('.avif');
 
-  // Handle media load failure gracefully
   const handleMediaError = () => {
-    setHasError(true);
+    if (currentIndex + 1 < candidateList.length) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      setAllFailed(true);
+    }
   };
 
   useEffect(() => {
-    if (hasConfiguredMedia && isVideo && videoRef.current) {
+    if (!allFailed && isVideo && videoRef.current) {
       videoRef.current.play().catch(() => {
-        // Safe handling if browser autoplay policies require interaction
+        // Autoplay policy fallback
       });
     }
-  }, [hasConfiguredMedia, isVideo, mediaSrc]);
+  }, [allFailed, isVideo, currentSrc]);
 
   return (
     <div className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center select-none">
       {/* Exact Circular Hero Visual Container */}
       <div className="w-[76%] h-[76%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(228,3,46,0.25)] border border-red-500/20 bg-[#080A10] flex items-center justify-center relative">
-        {hasConfiguredMedia ? (
+        {!allFailed && currentSrc ? (
           <>
             {isVideo ? (
               <video
+                key={currentSrc}
                 ref={videoRef}
-                src={mediaSrc}
+                src={currentSrc}
                 autoPlay
                 loop
                 muted
@@ -324,13 +344,13 @@ export const Globe3D: React.FC<Globe3DProps> = ({
               />
             ) : isImageOrGif ? (
               <img
-                src={mediaSrc}
+                key={currentSrc}
+                src={currentSrc}
                 alt={alt}
                 onError={handleMediaError}
                 className="w-full h-full object-cover rounded-full scale-105"
               />
             ) : (
-              // If format unrecognized, fall back to coded globe
               <CodedGlobe />
             )}
 

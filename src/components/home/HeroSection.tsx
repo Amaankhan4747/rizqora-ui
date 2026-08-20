@@ -136,8 +136,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             {/* Radial Red Ambient Glow behind Globe */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 via-red-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-            {/* Realistic Dark 3D Canvas Globe */}
-            <Globe3D />
+            {/* Realistic Dark 3D Globe Media Visual */}
+            <Globe3D mediaSrc="/assets/gifs/globe.gif" />
 
             {/* Floating Stat Cards Surrounding Globe (Matching Reference Image exact composition) */}
             
