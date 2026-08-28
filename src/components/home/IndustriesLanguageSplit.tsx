@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import { INDUSTRIES_DATA } from '../../data/mockData';
 import { IconHelper } from '../common/IconHelper';
 import { ArrowRight, Globe, Layers, MapPin } from 'lucide-react';
+import { PageId } from '../../types';
 
-export const IndustriesLanguageSplit: React.FC = () => {
+interface IndustriesLanguageSplitProps {
+  onNavigate?: (page: PageId, detailId?: string) => void;
+}
+
+export const IndustriesLanguageSplit: React.FC<IndustriesLanguageSplitProps> = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

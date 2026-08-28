@@ -16,6 +16,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'High-precision enterprise translation combining neural machine intelligence with certified native linguists. Tailored for corporate documentation, marketing assets, technical manuals, and digital products.',
     iconName: 'Globe',
+    image:
+      'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80',
     features: [
       'Dual Human-AI Validation',
       'Terminology Glossary Management',
@@ -42,6 +44,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'End-to-end software, web, app, and media localization that adapts tone, imagery, regional nuances, and formatting to resonate naturally with target international audiences.',
     iconName: 'Sparkles',
+    image:
+      'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80',
     features: [
       'Cultural Nuance & Idiom Adaptation',
       'UI/UX String Length Optimization',
@@ -68,6 +72,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Clean, structured, and expertly annotated multilingual datasets for LLM pre-training, RLHF alignment, tokenization, sentiment analysis, and speech recognition models.',
     iconName: 'Cpu',
+    image:
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600&q=80',
     features: [
       'Multilingual Text & Audio Labeling',
       'RLHF & Model Red-Teaming',
@@ -94,6 +100,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Combine state-of-the-art Neural Machine Translation (NMT) with rapid professional post-editing by expert linguists for maximum throughput without compromising quality.',
     iconName: 'Zap',
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
     features: [
       'Light & Full Post-Editing Tiers',
       'Real-time NMT Engine Fine-Tuning',
@@ -120,6 +128,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Independent audit and rigorous scoring of localized content using MQM-DQF frameworks to ensure linguistic accuracy, brand alignment, and compliance before publication.',
     iconName: 'ShieldCheck',
+    image:
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
     features: [
       'MQM Metric Quality Scoring',
       'In-Context Bug Tracking & Logging',
@@ -146,6 +156,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Automated and human-verified speech-to-text transcriptions for audio and video files across 100+ languages with timestamps, speaker identification, and verbatim options.',
     iconName: 'Mic',
+    image:
+      'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=600&q=80',
     features: [
       'Multi-Speaker Diarization',
       'Time-coded Sub-Second Markers',
@@ -172,6 +184,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Professional subtitling, closed captioning, and SDH (Subtitles for the Deaf and Hard of Hearing) formatted perfectly for streaming, broadcast, social media, and cinema.',
     iconName: 'Film',
+    image:
+      'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=600&q=80',
     features: [
       'Reading Speed (CPS) Constraint Enforcement',
       'SRT, VTT, DFXP & Custom Formats',
@@ -198,6 +212,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Layout design, typography adjustment, and page formatting for translated materials across InDesign, Illustrator, PDF, and Framer to match original design fidelity.',
     iconName: 'FileText',
+    image:
+      'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80',
     features: [
       'Bi-directional (RTL/LTR) Layout Adaptation',
       'Font & Glyph Substitution',
@@ -224,6 +240,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Comprehensive content strategy, multilingual copywriting, transcreation, and CMS pipeline integration to power high-growth global brand presence.',
     iconName: 'Layers',
+    image:
+      'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=600&q=80',
     features: [
       'Transcreation & Creative Copywriting',
       'Global SEO & Keyword Research',
@@ -250,6 +268,8 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDesc:
       'Executive-level localization advisory, tech stack auditing, AI implementation roadmaps, and global workflow optimization for Fortune 500 enterprises.',
     iconName: 'Compass',
+    image:
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
     features: [
       'Localization ROI & Maturity Assessment',
       'Custom MT Engine Selection & Benchmarking',
