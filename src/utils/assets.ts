@@ -14,7 +14,7 @@ export const ASSET_PATHS = {
     globeMp4: '/assets/videos/globe.mp4',
   },
   gifs: {
-    globeGif: '/assets/gifs/globe.gif',
+    globeGif: '/assets/gifs/glob.gif',
   },
 };
 

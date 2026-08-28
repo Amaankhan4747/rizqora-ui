@@ -16,7 +16,7 @@ const STAT_ITEMS: StatCardData[] = [
   {
     id: 'throughput',
     badge: 'Daily Throughput',
-    value: '500M+',
+    value: '5K+',
     label: 'Words Processed Daily',
     subtext: 'Real-Time Enterprise Translation Engine',
     icon: TrendingUp,
@@ -52,9 +52,9 @@ const STAT_ITEMS: StatCardData[] = [
   {
     id: 'clients',
     badge: 'Enterprise Trust',
-    value: '1,500+',
+    value: '250+',
     label: 'Global Enterprise Clients',
-    subtext: 'Fortune 500 & Global Brands',
+    subtext: 'Fortune 50 & Global Brands',
     icon: Globe2,
     chartType: 'ring',
   },

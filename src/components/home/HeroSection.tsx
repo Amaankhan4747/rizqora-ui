@@ -36,7 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           {/* Left Hero Content */}
           <div className="lg:col-span-6 space-y-7 text-left z-10">
             {/* Top Pill Badge */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -45,7 +45,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               <Sparkles className="w-3.5 h-3.5" />
               <span>Next-Gen Enterprise Language AI</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4032E] animate-pulse" />
-            </motion.div>
+            </motion.div> */}
 
             {/* Main Headline */}
             <motion.h1
@@ -102,7 +102,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               className="pt-8 border-t border-slate-200/80"
             >
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
-                Trusted by 1,500+ global brands worldwide
+                Trusted by 210+ global brands worldwide
               </p>
 
               {/* Infinite Logo Marquee Track with Soft Edge Fades */}
@@ -178,7 +178,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Global Reach
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  200+
+                  10+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Countries
@@ -201,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Language Coverage
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  1,000+
+                  87+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Languages
@@ -227,7 +227,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Projects Delivered
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  20K+
+                  15+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Successful Projects
