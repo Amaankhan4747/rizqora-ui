@@ -23,6 +23,7 @@ export interface ServiceItem {
   oneLineDesc: string;
   fullDesc: string;
   iconName: string;
+  image?: string;
   features: string[];
   benefits: string[];
   useCases: string[];
