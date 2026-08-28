@@ -149,7 +149,7 @@ export const LanguagesPage: React.FC<LanguagesPageProps> = ({ onNavigate }) => {
             Need a rare or custom indigenous dialect?
           </h3>
           <p className="text-xs text-slate-600 max-w-xl mx-auto">
-            Rizqora network includes native specialists for over 1,000 low-resource regional dialects worldwide.
+            Rizqoraa network includes native specialists for over 1,000 low-resource regional dialects worldwide.
           </p>
           <button
             onClick={() => onNavigate('quote')}

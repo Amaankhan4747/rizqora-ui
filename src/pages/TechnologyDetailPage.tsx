@@ -50,7 +50,7 @@ export const TechnologyDetailPage: React.FC = () => {
                 to="/quote"
                 className="bg-[#E4032E] hover:bg-[#c30226] text-white px-7 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-red-600/30 flex items-center gap-2 transition-all"
               >
-                <span>Deploy with Rizqora</span>
+                <span>Deploy with Rizqoraa</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link

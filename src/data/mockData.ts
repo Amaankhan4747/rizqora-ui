@@ -511,8 +511,8 @@ export const VALUE_PROPOSITIONS = [
 
 export const TECH_TILES = [
   {
-    id: 'rizqora-ai',
-    name: 'Rizqora AI',
+    id: 'Rizqoraa-ai',
+    name: 'Rizqoraa AI',
     subtitle: 'Proprietary Engine',
     desc: 'Proprietary AI engine for language understanding, context awareness, and semantic alignment.',
     icon: 'BrainCircuit',
@@ -683,7 +683,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'Discover why combining advanced AI translation models with specialized human proofreaders delivers 5x faster releases while maintaining zero-defect accuracy.',
     content: `As global enterprises expand into new territories, traditional translation methodologies can no longer keep pace with daily content creation velocity. Machine Translation Post-Editing (MTPE) has evolved from a simple cost-saving tactic into a strategic growth lever.
 
-In this deep dive, we explore how Rizqora AI integrates neural translation engines directly into post-editor workflows, predicting linguistic errors before human review occurs.`,
+In this deep dive, we explore how Rizqoraa AI integrates neural translation engines directly into post-editor workflows, predicting linguistic errors before human review occurs.`,
     category: 'MTPE Strategy',
     author: 'Elena Rostova',
     authorRole: 'Chief Technology Officer',
@@ -698,7 +698,7 @@ In this deep dive, we explore how Rizqora AI integrates neural translation engin
       'Why low-resource language accuracy is the next frontier for Large Language Models, and how structured human-in-the-loop datasets bridge the gap.',
     content: `Building high-performing generative AI models requires vast quantities of high-quality, culturally relevant training data. When expanding models beyond English, standard web scrapes introduce bias, slang hallucination, and severe accuracy degradation.
 
-Learn how Rizqora Solutions curates and annotates multilingual RLHF data across 100+ native dialects.`,
+Learn how Rizqoraa Solutions curates and annotates multilingual RLHF data across 100+ native dialects.`,
     category: 'AI Localization',
     author: 'Dr. Marcus Vance',
     authorRole: 'Head of AI Research',
@@ -713,7 +713,7 @@ Learn how Rizqora Solutions curates and annotates multilingual RLHF data across 
       'A practical guide to implementing Multidimensional Quality Metrics (MQM) for measurable, transparent localization quality assurance.',
     content: `Without objective metrics, quality feedback often degenerates into subjective opinions. Enterprise buyers need data-driven benchmarks to measure language service provider accuracy.
 
-This paper outlines the exact MQM scoring framework Rizqora Solutions uses to maintain a 98.7% average quality score across global client projects.`,
+This paper outlines the exact MQM scoring framework Rizqoraa Solutions uses to maintain a 98.7% average quality score across global client projects.`,
     category: 'LQA & Compliance',
     author: 'Sarah Chen',
     authorRole: 'VP of Quality Assurance',
@@ -735,7 +735,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     challenge:
       'The client had over 1.4 million UI strings, technical documentation, and customer support articles scattered across Git repos, with strict UI character limits.',
     solution:
-      'Rizqora Solutions integrated direct CI/CD workflow connectors with Rizqora AI NMT engine and 45 specialized SaaS linguists for real-time post-editing.',
+      'Rizqoraa Solutions integrated direct CI/CD workflow connectors with Rizqoraa AI NMT engine and 45 specialized SaaS linguists for real-time post-editing.',
     results: [
       { metric: '60 Days', label: 'Full 28-language rollout' },
       { metric: '42%', label: 'Cost reduction vs traditional agency' },
@@ -743,7 +743,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonial: {
       quote:
-        'Rizqora Solutions felt like an internal team extension. Their automated Git workflow enabled us to launch in 28 markets seamlessly on day one.',
+        'Rizqoraa Solutions felt like an internal team extension. Their automated Git workflow enabled us to launch in 28 markets seamlessly on day one.',
       author: 'David Sterling',
       role: 'VP of Product Operations, GlobalCloud',
     },
@@ -767,7 +767,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonial: {
       quote:
-        'When patient safety and regulatory approval are on the line, Rizqora Solutions is our only trusted language partner.',
+        'When patient safety and regulatory approval are on the line, Rizqoraa Solutions is our only trusted language partner.',
       author: 'Dr. Katherine Meyer',
       role: 'Director of Regulatory Affairs, HealthTech Global',
     },
@@ -791,7 +791,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonial: {
       quote:
-        'The speed and accuracy of Rizqora MTPE engine allowed us to double our cross-border revenue within six months.',
+        'The speed and accuracy of Rizqoraa MTPE engine allowed us to double our cross-border revenue within six months.',
       author: 'Hiroshi Tanaka',
       role: 'Chief Revenue Officer, OmniCart',
     },
@@ -834,7 +834,7 @@ export const OPEN_POSITIONS: JobPosition[] = [
     location: 'Remote (Worldwide)',
     type: 'Contract',
     experience: '3+ years certified',
-    desc: 'Join Rizqora Solutions elite global network of over 10,000 certified translators, MTPE editors, and domain subject-matter experts.',
+    desc: 'Join Rizqoraa Solutions elite global network of over 10,000 certified translators, MTPE editors, and domain subject-matter experts.',
     responsibilities: [
       'Perform high-precision human translation and MT post-editing',
       'Conduct LQA reviews and terminology glossary maintenance',
@@ -849,7 +849,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'United States',
     address: '500 Howard Street, Suite 400, San Francisco, CA 94105',
     phone: '+1 (415) 890-3400',
-    email: 'sf@rizqora.com',
+    email: 'sf@Rizqoraa.com',
     timezone: 'PST (UTC-8)',
     isHQ: true,
   },
@@ -858,7 +858,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'United Kingdom',
     address: '25 Bank Street, Canary Wharf, London E14 5JP',
     phone: '+44 20 7946 0912',
-    email: 'london@rizqora.com',
+    email: 'london@Rizqoraa.com',
     timezone: 'GMT (UTC+0)',
   },
   {
@@ -866,7 +866,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'Japan',
     address: 'Roppongi Hills Mori Tower 28F, Minato-ku, Tokyo 106-6108',
     phone: '+81 3 5555 0143',
-    email: 'tokyo@rizqora.com',
+    email: 'tokyo@Rizqoraa.com',
     timezone: 'JST (UTC+9)',
   },
   {
@@ -874,7 +874,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'United Arab Emirates',
     address: 'DIFC Gate Precinct Building 4, Level 5, Dubai',
     phone: '+971 4 312 9000',
-    email: 'dubai@rizqora.com',
+    email: 'dubai@Rizqoraa.com',
     timezone: 'GST (UTC+4)',
   },
   {
@@ -882,7 +882,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     country: 'Singapore',
     address: '1 Marina Boulevard, Level 20, Singapore 018989',
     phone: '+65 6789 0123',
-    email: 'singapore@rizqora.com',
+    email: 'singapore@Rizqoraa.com',
     timezone: 'SGT (UTC+8)',
   },
 ];

@@ -38,7 +38,7 @@ export const SocialProofTrio: React.FC<SocialProofTrioProps> = ({ onNavigate }) 
                 Trusted by Global Leaders
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Hear from multinational enterprises that achieved global expansion success with Rizqora Solutions.
+                Hear from multinational enterprises that achieved global expansion success with Rizqoraa Solutions.
               </p>
 
               {/* Supporting Graphic: Quote & Rating */}
@@ -49,7 +49,7 @@ export const SocialProofTrio: React.FC<SocialProofTrioProps> = ({ onNavigate }) 
                   ))}
                 </div>
                 <p className="text-xs text-slate-700 italic">
-                  "Rizqora's MTPE workflow allowed us to launch in 28 countries simultaneously with 99.4% accuracy."
+                  "Rizqoraa's MTPE workflow allowed us to launch in 28 countries simultaneously with 99.4% accuracy."
                 </p>
                 <div className="text-[11px] font-bold text-slate-900">
                   — David Sterling, GlobalCloud Inc.

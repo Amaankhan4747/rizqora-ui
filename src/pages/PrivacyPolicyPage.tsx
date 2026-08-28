@@ -21,7 +21,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = () => {
 
         <div className="prose max-w-none text-xs sm:text-sm text-slate-700 leading-relaxed space-y-4">
           <p>
-            Rizqora Solutions Inc. ("Rizqora", "we", "us", or "our") is committed to protecting the privacy and security of your personal data and confidential enterprise documents. This Privacy Policy outlines how we collect, use, process, and safeguard information when you use our website, services, and AI localization platform.
+            Rizqoraa Solutions Inc. ("Rizqoraa", "we", "us", or "our") is committed to protecting the privacy and security of your personal data and confidential enterprise documents. This Privacy Policy outlines how we collect, use, process, and safeguard information when you use our website, services, and AI localization platform.
           </p>
 
           <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">1. Information We Collect</h3>
@@ -36,7 +36,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = () => {
 
           <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">3. GDPR & International Compliance</h3>
           <p>
-            Rizqora Solutions complies with European Union General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and SOC-2 Type II standards.
+            Rizqoraa Solutions complies with European Union General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and SOC-2 Type II standards.
           </p>
 
           <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">4. Security Measures</h3>

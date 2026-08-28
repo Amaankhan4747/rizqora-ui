@@ -50,7 +50,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       name: 'Sarah Chen',
       role: 'VP of Quality Assurance',
-      bio: 'ISO 17100 lead auditor overseeing Rizqora network of 10,000+ certified linguists and subject-matter experts.',
+      bio: 'ISO 17100 lead auditor overseeing Rizqoraa network of 10,000+ certified linguists and subject-matter experts.',
     },
   ];
 
@@ -60,13 +60,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       <section className="bg-slate-50/70 border-b border-slate-200/80 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-center max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">
-            ABOUT RIZQORA SOLUTIONS
+            ABOUT Rizqoraa SOLUTIONS
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
             Redefining Enterprise Communication for a Connected World.
           </h1>
           <p className="text-base text-slate-600 leading-relaxed">
-            Rizqora Solutions is a next-generation Global Language Solutions & AI Localization company. We empower global enterprises to expand effortlessly into international markets.
+            Rizqoraa Solutions is a next-generation Global Language Solutions & AI Localization company. We empower global enterprises to expand effortlessly into international markets.
           </p>
         </div>
       </section>
@@ -82,10 +82,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               Not a traditional translation agency. A global language-technology powerhouse.
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Founded to bridge the gap between fast-moving software development and traditional translation agencies, Rizqora Solutions combines proprietary neural machine translation engines with an elite network of certified native linguists.
+              Founded to bridge the gap between fast-moving software development and traditional translation agencies, Rizqoraa Solutions combines proprietary neural machine translation engines with an elite network of certified native linguists.
             </p>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Whether you are localizing a complex SaaS platform, training LLMs on low-resource language datasets, or certifying medical trial documents for regulatory approval, Rizqora provides end-to-end precision and continuous pipeline automation.
+              Whether you are localizing a complex SaaS platform, training LLMs on low-resource language datasets, or certifying medical trial documents for regulatory approval, Rizqoraa provides end-to-end precision and continuous pipeline automation.
             </p>
 
             <div className="pt-4 grid grid-cols-2 gap-4 text-xs font-bold">
@@ -163,7 +163,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             EXECUTIVE LEADERSHIP
           </span>
           <h2 className="text-3xl font-extrabold text-[#141414] font-['Space_Grotesk']">
-            Meet the Pioneers Behind Rizqora
+            Meet the Pioneers Behind Rizqoraa
           </h2>
         </div>
 
@@ -190,7 +190,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <div className="p-10 rounded-3xl bg-[#0A0A0A] text-white flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-left">
             <h3 className="text-2xl font-extrabold font-['Space_Grotesk']">
-              Ready to partner with Rizqora Solutions?
+              Ready to partner with Rizqoraa Solutions?
             </h3>
             <p className="text-sm text-slate-400">
               Get an enterprise quote tailored to your language and technology requirements.

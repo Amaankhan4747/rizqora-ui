@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export const WhatsAppButton: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const phoneNumber = '918619086127';
-  const defaultMessage = 'Hello Rizqora Solutions, I would like to know more about your services.';
+  const defaultMessage = 'Hello Rizqoraa Solutions, I would like to know more about your services.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   return (
@@ -25,7 +25,7 @@ export const WhatsAppButton: React.FC = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp with Rizqora Solutions"
+        aria-label="Chat on WhatsApp with Rizqoraa Solutions"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="relative group w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_12px_30px_rgba(37,211,102,0.6)] transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300"

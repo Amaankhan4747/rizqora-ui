@@ -7,11 +7,11 @@ interface AiSolutionsPageProps {
 }
 
 export const AiSolutionsPage: React.FC<AiSolutionsPageProps> = ({ onNavigate }) => {
-  const [inputText, setInputText] = useState('Welcome to Rizqora Solutions. We deliver high-precision enterprise AI localization and neural machine translation.');
+  const [inputText, setInputText] = useState('Welcome to Rizqoraa Solutions. We deliver high-precision enterprise AI localization and neural machine translation.');
   const [targetLang, setTargetLang] = useState('Spanish');
   const [isProcessing, setIsProcessing] = useState(false);
   const [translatedResult, setTranslatedResult] = useState({
-    output: 'Bienvenido a Rizqora Solutions. Ofrecemos localización de Inteligencia Artificial empresarial y traducción automática neuronal de alta precisión.',
+    output: 'Bienvenido a Rizqoraa Solutions. Ofrecemos localización de Inteligencia Artificial empresarial y traducción automática neuronal de alta precisión.',
     qualityScore: '99.2%',
     mtpeSuggested: 'Human Verified (ISO 17100)',
     confidence: '99.8%',
@@ -23,28 +23,28 @@ export const AiSolutionsPage: React.FC<AiSolutionsPageProps> = ({ onNavigate }) 
       setIsProcessing(false);
       if (targetLang === 'Spanish') {
         setTranslatedResult({
-          output: 'Bienvenido a Rizqora Solutions. Ofrecemos localización de Inteligencia Artificial empresarial y traducción automática neuronal de alta precisión.',
+          output: 'Bienvenido a Rizqoraa Solutions. Ofrecemos localización de Inteligencia Artificial empresarial y traducción automática neuronal de alta precisión.',
           qualityScore: '99.2%',
           mtpeSuggested: 'Verified by Native Editor',
           confidence: '99.8%',
         });
       } else if (targetLang === 'German') {
         setTranslatedResult({
-          output: 'Willkommen bei Rizqora Solutions. Wir bieten hochpräzise KI-Lokalisierung und neuronale maschinelle Übersetzung für Unternehmen.',
+          output: 'Willkommen bei Rizqoraa Solutions. Wir bieten hochpräzise KI-Lokalisierung und neuronale maschinelle Übersetzung für Unternehmen.',
           qualityScore: '99.4%',
           mtpeSuggested: 'Verified by Native Editor',
           confidence: '99.9%',
         });
       } else if (targetLang === 'Japanese') {
         setTranslatedResult({
-          output: 'Rizqora Solutionsへようこそ。企業向けの超高精度AIローカリゼーションとニューラル機械翻訳を提供します。',
+          output: 'Rizqoraa Solutionsへようこそ。企業向けの超高精度AIローカリゼーションとニューラル機械翻訳を提供します。',
           qualityScore: '98.8%',
           mtpeSuggested: 'Verified by Native Editor',
           confidence: '99.5%',
         });
       } else if (targetLang === 'French') {
         setTranslatedResult({
-          output: 'Bienvenue chez Rizqora Solutions. Nous fournissons une localisation IA d’entreprise de haute précision et une traduction automatique neuronale.',
+          output: 'Bienvenue chez Rizqoraa Solutions. Nous fournissons une localisation IA d’entreprise de haute précision et une traduction automatique neuronale.',
           qualityScore: '99.3%',
           mtpeSuggested: 'Verified by Native Editor',
           confidence: '99.7%',
@@ -80,7 +80,7 @@ export const AiSolutionsPage: React.FC<AiSolutionsPageProps> = ({ onNavigate }) 
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white font-['Space_Grotesk']">
-                  Rizqora AI Quality Intelligence Sandbox
+                  Rizqoraa AI Quality Intelligence Sandbox
                 </h3>
                 <p className="text-xs text-slate-400">
                   Experience real-time MT inference and MQM error estimation scoring.
@@ -128,7 +128,7 @@ export const AiSolutionsPage: React.FC<AiSolutionsPageProps> = ({ onNavigate }) 
                 ) : (
                   <>
                     <Cpu className="w-4 h-4" />
-                    Run Rizqora AI Inference & MQM Audit
+                    Run Rizqoraa AI Inference & MQM Audit
                   </>
                 )}
               </button>

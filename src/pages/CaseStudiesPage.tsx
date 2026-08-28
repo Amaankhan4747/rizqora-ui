@@ -22,7 +22,7 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onNavigate }) 
             Enterprise Client Success Stories
           </h1>
           <p className="text-base text-slate-600 leading-relaxed">
-            Discover how leading global enterprises scale faster, reduce localization overhead by up to 45%, and maintain 99%+ quality accuracy with Rizqora Solutions.
+            Discover how leading global enterprises scale faster, reduce localization overhead by up to 45%, and maintain 99%+ quality accuracy with Rizqoraa Solutions.
           </p>
         </div>
       </section>
@@ -99,7 +99,7 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onNavigate }) 
 
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-600">
-                  Rizqora Solution
+                  Rizqoraa Solution
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   {activeCS.solution}

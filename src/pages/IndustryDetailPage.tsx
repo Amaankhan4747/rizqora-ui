@@ -111,11 +111,11 @@ export const IndustryDetailPage: React.FC = () => {
               </ul>
             </div>
 
-            {/* Rizqora Solutions */}
+            {/* Rizqoraa Solutions */}
             <div className="p-8 rounded-3xl bg-red-50/50 border border-red-100 space-y-6">
               <div className="flex items-center gap-2 text-sm font-bold text-emerald-600 uppercase tracking-wider">
                 <CheckCircle2 className="w-5 h-5" />
-                <span>Rizqora Specialized Solutions</span>
+                <span>Rizqoraa Specialized Solutions</span>
               </div>
               <ul className="space-y-3">
                 {industry.solutionHighlights.map((s, idx) => (
@@ -141,7 +141,7 @@ export const IndustryDetailPage: React.FC = () => {
                 {industry.statLabel}
               </div>
               <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-800 w-full">
-                Verified benchmark across Rizqora client implementations.
+                Verified benchmark across Rizqoraa client implementations.
               </div>
             </div>
 

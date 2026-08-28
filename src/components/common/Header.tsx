@@ -45,7 +45,7 @@ export const Header: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-extrabold tracking-tight text-[#141414] font-['Space_Grotesk'] leading-none">
-                Rizqora<span className="text-[#E4032E]">.</span>
+                Rizqoraa<span className="text-[#E4032E]">.</span>
               </span>
               <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold leading-tight">
                 Solutions

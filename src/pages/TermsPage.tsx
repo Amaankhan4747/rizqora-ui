@@ -21,7 +21,7 @@ export const TermsPage: React.FC<TermsPageProps> = () => {
 
         <div className="prose max-w-none text-xs sm:text-sm text-slate-700 leading-relaxed space-y-4">
           <p>
-            Welcome to Rizqora Solutions. By accessing our website, AI localization platform, or ordering enterprise language services, you agree to be bound by these Terms of Service.
+            Welcome to Rizqoraa Solutions. By accessing our website, AI localization platform, or ordering enterprise language services, you agree to be bound by these Terms of Service.
           </p>
 
           <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">1. Service Level Agreements (SLAs)</h3>
@@ -36,7 +36,7 @@ export const TermsPage: React.FC<TermsPageProps> = () => {
 
           <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">3. Limitation of Liability</h3>
           <p>
-            Rizqora Solutions provides quality guarantees through independent LQA and MQM scoring frameworks as specified in standard enterprise agreements.
+            Rizqoraa Solutions provides quality guarantees through independent LQA and MQM scoring frameworks as specified in standard enterprise agreements.
           </p>
         </div>
       </div>

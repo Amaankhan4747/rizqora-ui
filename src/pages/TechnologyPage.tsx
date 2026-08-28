@@ -94,7 +94,7 @@ export const TechnologyPage: React.FC<TechnologyPageProps> = ({ onNavigate }) =>
               Bank-Grade Security for Enterprise Data
             </h2>
             <p className="text-sm text-slate-300 leading-relaxed">
-              We understand that corporate documents, source code, and patient records require absolute confidentiality. Rizqora platform operates under strict SOC-2 Type II standards.
+              We understand that corporate documents, source code, and patient records require absolute confidentiality. Rizqoraa platform operates under strict SOC-2 Type II standards.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">

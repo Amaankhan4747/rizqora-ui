@@ -66,7 +66,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   Message Sent Successfully!
                 </h3>
                 <p className="text-xs text-emerald-700">
-                  Thank you for reaching out to Rizqora Solutions. A senior global account executive will contact you shortly.
+                  Thank you for reaching out to Rizqoraa Solutions. A senior global account executive will contact you shortly.
                 </p>
               </div>
             ) : (

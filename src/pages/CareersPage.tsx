@@ -34,7 +34,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
       <section className="bg-slate-50/70 border-b border-slate-200/80 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4">
           <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">
-            JOIN RIZQORA SOLUTIONS
+            JOIN Rizqoraa SOLUTIONS
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
             Build the Future of Global Language AI

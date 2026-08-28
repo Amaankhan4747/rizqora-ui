@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold tracking-tight text-white font-['Space_Grotesk'] leading-none">
-                  Rizqora<span className="text-[#E4032E]">.</span>
+                  Rizqoraa<span className="text-[#E4032E]">.</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-tight">
                   Solutions
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
             <div className="pt-2 text-xs text-slate-400 space-y-2">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#E4032E]" />
-                <span>enterprise@rizqorasolutions.com</span>
+                <span>enterprise@Rizqoraasolutions.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#E4032E]" />
@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
         {/* Bottom copyright & legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © {new Date().getFullYear()} Rizqora Solutions Inc. All rights reserved. ISO 17100:2015 & ISO 9001:2015 Certified.
+            © {new Date().getFullYear()} Rizqoraa Solutions Inc. All rights reserved. ISO 17100:2015 & ISO 9001:2015 Certified.
           </div>
           <div className="flex items-center gap-6">
             <Link to="/privacy" className="hover:text-slate-300">Privacy Policy</Link>

@@ -1,5 +1,5 @@
 /**
- * Rizqora Solutions Enterprise Website
+ * Rizqoraa Solutions Enterprise Website
  * Apache-2.0 License
  */
 
