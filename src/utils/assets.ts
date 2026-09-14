@@ -8,6 +8,14 @@
 
 export const ASSET_PATHS = {
   images: {
+    // Manual upload file slots
+    logo: '/assets/images/logo.png',
+    logoDark: '/assets/images/logo-dark.png',
+    techBg: '/assets/images/tech-bg.png',
+    // Aliases
+    bgMap: '/assets/images/tech-bg.png',
+    rizqoraaLogo: '/assets/images/logo.png',
+    rizqoraaLogoDark: '/assets/images/logo-dark.png',
     globePng: '/assets/images/globe.png',
   },
   videos: {

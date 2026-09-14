@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { TECH_TILES } from '../data/mockData';
 import { IconHelper } from '../components/common/IconHelper';
 import { ShieldCheck, Cpu, Lock, Workflow, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ASSET_PATHS } from '../utils/assets';
 
 interface TechnologyPageProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -21,8 +22,13 @@ export const TechnologyPage: React.FC<TechnologyPageProps> = ({ onNavigate }) =>
   return (
     <div className="pt-28 pb-20 bg-white">
       {/* Header Banner */}
-      <section className="bg-[#0A0A0A] text-white py-16 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#E4032E_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+      <section className="bg-[#0A0A0A] text-white py-20 border-b border-slate-800 relative overflow-hidden">
+        {/* Background Image Slot (upload manual file to: public/assets/images/tech-bg.png) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none transition-opacity duration-300"
+          style={{ backgroundImage: `url('${ASSET_PATHS.images.techBg}')` }}
+        />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4 relative z-10">
           <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">
             TECHNOLOGY ARCHITECTURE
