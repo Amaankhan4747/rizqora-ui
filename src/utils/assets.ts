@@ -8,14 +8,15 @@
 
 export const ASSET_PATHS = {
   images: {
-    // User-uploaded high resolution assets
-    logo: '/assets/images/rizqoraalogo.png',
+    // Header logo
+    logo: '/rizqoraalogo.png',
     logoRaw: '/rizqoraalogo.png',
-    logoDark: '/assets/images/rizqoraalogo_dark.png',
+    logoAlt: '/assets/images/rizqoraalogo.png',
+    // Dedicated Footer logo (upload new file to: public/footer-logo.png)
+    footerLogo: '/footer-logo.png',
+    footerLogoAlt: '/assets/images/footer-logo.png',
     techBg: '/Bgmap.png',
     bgMap: '/Bgmap.png',
-    rizqoraaLogo: '/assets/images/rizqoraalogo.png',
-    rizqoraaLogoDark: '/assets/images/rizqoraalogo_dark.png',
     globePng: '/assets/images/globe.png',
   },
   videos: {

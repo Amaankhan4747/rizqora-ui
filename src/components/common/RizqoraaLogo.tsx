@@ -16,17 +16,21 @@ export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
   const [imgError, setImgError] = useState(false);
 
   // High-resolution uploaded logo paths:
-  const primarySrc = variant === 'dark' 
-    ? ASSET_PATHS.images.rizqoraaLogoDark 
-    : ASSET_PATHS.images.rizqoraaLogo;
+  // - Header (light): /rizqoraalogo.png
+  // - Footer (dark): /footer-logo.png (dedicated footer logo file)
+  const isDark = variant === 'dark';
+  const primarySrc = isDark 
+    ? ASSET_PATHS.images.footerLogo 
+    : ASSET_PATHS.images.logo;
 
-  const fallbackSrc = ASSET_PATHS.images.logoRaw;
+  const fallbackSrc = isDark 
+    ? ASSET_PATHS.images.footerLogoAlt 
+    : ASSET_PATHS.images.logoAlt;
 
   const heightStyle = typeof height === 'number' ? `${height}px` : height;
 
   if (imgError) {
     // Graceful SVG typography fallback if asset fails
-    const isDark = variant === 'dark';
     return (
       <div 
         className={`inline-flex items-center gap-2 select-none px-1 py-0.5 rounded transition-colors ${className}`}
@@ -60,7 +64,7 @@ export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
         className="w-auto h-full max-h-full object-contain transition-opacity duration-200"
         onError={(e) => {
           const target = e.currentTarget;
-          if (target.src !== window.location.origin + fallbackSrc) {
+          if (fallbackSrc && target.src !== window.location.origin + fallbackSrc) {
             target.src = fallbackSrc;
           } else {
             setImgError(true);

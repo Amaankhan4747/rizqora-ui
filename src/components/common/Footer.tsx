@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center group py-1" aria-label="Rizqoraa Home">
-              <RizqoraaLogo height={42} variant="dark" className="group-hover:opacity-95 transition-opacity" />
+              <RizqoraaLogo height={48} variant="dark" className="group-hover:opacity-95 transition-opacity" />
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
