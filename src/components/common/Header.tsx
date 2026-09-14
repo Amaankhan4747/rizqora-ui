@@ -37,9 +37,18 @@ export const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" onClick={closeMenus} className="flex items-center group py-1" aria-label="Rizqoraa Home">
-            <RizqoraaLogo height={40} variant="light" className="group-hover:opacity-95 transition-opacity" />
-          </Link>
+          <Link
+  to="/"
+  onClick={closeMenus}
+  className="flex items-center group py-1"
+  aria-label="Rizqoraa Home"
+>
+  <RizqoraaLogo
+    height={60}
+    variant="light"
+    className="scale-[1.35] origin-left group-hover:opacity-95 transition-opacity"
+  />
+</Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">

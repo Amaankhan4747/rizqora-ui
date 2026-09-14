@@ -11,7 +11,7 @@ interface RizqoraaLogoProps {
 export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
   className = '',
   variant = 'light',
-  height = 38,
+  height = 40,
 }) => {
   const [imgError, setImgError] = useState(false);
 
