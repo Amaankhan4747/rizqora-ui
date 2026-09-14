@@ -15,17 +15,17 @@ export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
 }) => {
   const [imgError, setImgError] = useState(false);
 
-  // Dedicated manual upload file path:
-  // Upload light logo to: public/assets/images/logo.png
-  // Upload dark logo to: public/assets/images/logo-dark.png (or logo.png)
-  const imgSrc = variant === 'dark' 
-    ? (ASSET_PATHS.images.logoDark || ASSET_PATHS.images.logo)
-    : ASSET_PATHS.images.logo;
+  // High-resolution uploaded logo paths:
+  const primarySrc = variant === 'dark' 
+    ? ASSET_PATHS.images.rizqoraaLogoDark 
+    : ASSET_PATHS.images.rizqoraaLogo;
+
+  const fallbackSrc = ASSET_PATHS.images.logoRaw;
 
   const heightStyle = typeof height === 'number' ? `${height}px` : height;
 
   if (imgError) {
-    // Elegant fallback space reserved while or if manual logo file is replaced
+    // Graceful SVG typography fallback if asset fails
     const isDark = variant === 'dark';
     return (
       <div 
@@ -52,13 +52,20 @@ export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
   return (
     <div 
       className={`inline-flex items-center select-none ${className}`}
-      style={{ height: heightStyle, minWidth: '140px' }}
+      style={{ height: heightStyle }}
     >
       <img
-        src={imgSrc}
+        src={primarySrc}
         alt="Rizqoraa Logo"
         className="w-auto h-full max-h-full object-contain transition-opacity duration-200"
-        onError={() => setImgError(true)}
+        onError={(e) => {
+          const target = e.currentTarget;
+          if (target.src !== window.location.origin + fallbackSrc) {
+            target.src = fallbackSrc;
+          } else {
+            setImgError(true);
+          }
+        }}
       />
     </div>
   );

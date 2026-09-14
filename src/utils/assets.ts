@@ -8,14 +8,14 @@
 
 export const ASSET_PATHS = {
   images: {
-    // Manual upload file slots
-    logo: '/assets/images/logo.png',
-    logoDark: '/assets/images/logo-dark.png',
-    techBg: '/assets/images/tech-bg.png',
-    // Aliases
-    bgMap: '/assets/images/tech-bg.png',
-    rizqoraaLogo: '/assets/images/logo.png',
-    rizqoraaLogoDark: '/assets/images/logo-dark.png',
+    // User-uploaded high resolution assets
+    logo: '/assets/images/rizqoraalogo.png',
+    logoRaw: '/rizqoraalogo.png',
+    logoDark: '/assets/images/rizqoraalogo_dark.png',
+    techBg: '/Bgmap.png',
+    bgMap: '/Bgmap.png',
+    rizqoraaLogo: '/assets/images/rizqoraalogo.png',
+    rizqoraaLogoDark: '/assets/images/rizqoraalogo_dark.png',
     globePng: '/assets/images/globe.png',
   },
   videos: {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SERVICES_DATA, INDUSTRIES_DATA } from '../../data/mockData';
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight } from 'lucide-react';
+import { RizqoraaLogo } from './RizqoraaLogo';
 
 export const Footer: React.FC = () => {
   const getServiceSlug = (id: string) => (id === 'lqa' ? 'linguistic-quality-assurance' : id);
@@ -13,21 +14,8 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center">
-                <div className="w-5 h-5 border-2 border-black rounded-md rotate-45 flex items-center justify-center relative">
-                  <span className="w-2 h-2 rounded-full bg-[#E4032E] absolute -top-1 -right-1" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-black" />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-extrabold tracking-tight text-white font-['Space_Grotesk'] leading-none">
-                  Rizqoraa<span className="text-[#E4032E]">.</span>
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-tight">
-                  Solutions
-                </span>
-              </div>
+            <Link to="/" className="flex items-center group py-1" aria-label="Rizqoraa Home">
+              <RizqoraaLogo height={42} variant="dark" className="group-hover:opacity-95 transition-opacity" />
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">

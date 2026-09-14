@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SERVICES_DATA, INDUSTRIES_DATA } from '../../data/mockData';
 import { ChevronDown, Globe, Menu, X, ArrowRight } from 'lucide-react';
+import { RizqoraaLogo } from './RizqoraaLogo';
 
 export const Header: React.FC = () => {
   const location = useLocation();
@@ -36,21 +37,8 @@ export const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" onClick={closeMenus} className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-[#0A0A0A] flex items-center justify-center relative shadow-md group-hover:scale-105 transition-transform">
-              <div className="w-5 h-5 border-2 border-white/90 rounded-md rotate-45 flex items-center justify-center relative">
-                <span className="w-2 h-2 rounded-full bg-[#E4032E] absolute -top-1 -right-1 animate-pulse" />
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-extrabold tracking-tight text-[#141414] font-['Space_Grotesk'] leading-none">
-                Rizqoraa<span className="text-[#E4032E]">.</span>
-              </span>
-              <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold leading-tight">
-                Solutions
-              </span>
-            </div>
+          <Link to="/" onClick={closeMenus} className="flex items-center group py-1" aria-label="Rizqoraa Home">
+            <RizqoraaLogo height={40} variant="light" className="group-hover:opacity-95 transition-opacity" />
           </Link>
 
           {/* Desktop Nav */}
