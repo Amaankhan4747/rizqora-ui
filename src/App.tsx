@@ -35,9 +35,49 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Scroll to top on route change
+  // Scroll to top and synchronize canonical URL / page titles on route change
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const canonicalEl = document.getElementById('canonical-url') as HTMLLinkElement | null;
+    const path = location.pathname === '/' ? '' : location.pathname;
+    const targetCanonical = `https://rizqoraa.com${path}`;
+    if (canonicalEl) {
+      canonicalEl.setAttribute('href', targetCanonical);
+    }
+
+    const baseTitle = 'Rizqoraa Solutions';
+    if (location.pathname === '/') {
+      document.title = 'Rizqoraa Solutions | Global Language Solutions & AI Localization';
+    } else if (location.pathname.startsWith('/solutions') || location.pathname.startsWith('/services')) {
+      document.title = `Enterprise Solutions & Services | ${baseTitle}`;
+    } else if (location.pathname.startsWith('/industries')) {
+      document.title = `Industry Expertise | ${baseTitle}`;
+    } else if (location.pathname.startsWith('/technology')) {
+      document.title = `Language Technology & AI Architecture | ${baseTitle}`;
+    } else if (location.pathname === '/about') {
+      document.title = `About Us | ${baseTitle}`;
+    } else if (location.pathname === '/contact') {
+      document.title = `Contact Us | ${baseTitle}`;
+    } else if (location.pathname === '/quote') {
+      document.title = `Request an Enterprise Quote | ${baseTitle}`;
+    } else if (location.pathname === '/careers') {
+      document.title = `Careers & Talent Network | ${baseTitle}`;
+    } else if (location.pathname === '/languages') {
+      document.title = `Global Languages Coverage | ${baseTitle}`;
+    } else if (location.pathname === '/ai-solutions') {
+      document.title = `AI Solutions & Multilingual Data | ${baseTitle}`;
+    } else if (location.pathname === '/case-studies') {
+      document.title = `Client Case Studies | ${baseTitle}`;
+    } else if (location.pathname === '/resources') {
+      document.title = `Resources & Knowledge Hub | ${baseTitle}`;
+    } else if (location.pathname === '/blog') {
+      document.title = `Insights & Blog | ${baseTitle}`;
+    } else if (location.pathname === '/privacy') {
+      document.title = `Privacy Policy | ${baseTitle}`;
+    } else if (location.pathname === '/terms') {
+      document.title = `Terms of Service | ${baseTitle}`;
+    }
   }, [location.pathname]);
 
   const handleNavigate = (page: string, detailId?: string) => {

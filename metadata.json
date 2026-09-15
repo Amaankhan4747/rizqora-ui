@@ -1,6 +1,6 @@
 {
   "name": "Rizqoraa Solutions",
-  "description": "Enterprise Global Language Solutions & AI Localization Platform",
+  "description": "Rizqoraa Solutions provides global translation, localization, multilingual content, linguistic quality assurance, subtitling, transcription, and AI language solutions for businesses worldwide.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
