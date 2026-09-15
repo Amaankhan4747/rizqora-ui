@@ -346,7 +346,8 @@ export const Globe3D: React.FC<Globe3DProps> = ({
               <img
                 key={currentSrc}
                 src={currentSrc}
-                alt={alt}
+                alt={alt || "Interactive 3D Global Communications Network"}
+                decoding="async"
                 onError={handleMediaError}
                 className="w-full h-full object-contain select-none pointer-events-none"
               />

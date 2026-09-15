@@ -14,10 +14,12 @@ export const TechnologyBand: React.FC<TechnologyBandProps> = ({ onNavigate }) =>
     <section className="py-24 bg-[#0A0A0A] text-white relative overflow-hidden">
       {/* Background Image: World Map Network */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-90 transition-opacity duration-300"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
         style={{ backgroundImage: `url('${ASSET_PATHS.images.techBg}')` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-transparent to-[#0A0A0A]/60 pointer-events-none" />
+      {/* Subtle ~15-20% black fade overlay keeping world map visible & premium */}
+      <div className="absolute inset-0 bg-black/18 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]/40 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">

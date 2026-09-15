@@ -25,10 +25,12 @@ export const TechnologyPage: React.FC<TechnologyPageProps> = ({ onNavigate }) =>
       <section className="bg-[#0A0A0A] text-white py-20 border-b border-slate-800 relative overflow-hidden">
         {/* Background Image: World Map Network */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-90 transition-opacity duration-300"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
           style={{ backgroundImage: `url('${ASSET_PATHS.images.techBg}')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-transparent to-[#0A0A0A]/60 pointer-events-none" />
+        {/* Subtle ~15-20% black fade overlay keeping world map visible & premium */}
+        <div className="absolute inset-0 bg-black/18 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]/40 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4 relative z-10">
           <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">

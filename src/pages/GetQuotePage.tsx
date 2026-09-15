@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { PageId } from '../types';
 import { SERVICES_DATA } from '../data/mockData';
-import { Calculator, CheckCircle2, ArrowRight, Sparkles, Send, ShieldCheck, Clock, Check, Search, X } from 'lucide-react';
+import { Calculator, CheckCircle2, ArrowRight, Sparkles, Send, ShieldCheck, Clock, Check, Search, X, MessageSquare, ExternalLink } from 'lucide-react';
 
 interface GetQuotePageProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -58,6 +58,8 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
   const [wordCount, setWordCount] = useState<number>(5000);
   const [turnaroundOption, setTurnaroundOption] = useState<'standard' | 'express'>('standard');
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [generatedWhatsAppUrl, setGeneratedWhatsAppUrl] = useState('');
 
   // Search filter states
   const [fromSearch, setFromSearch] = useState('');
@@ -110,9 +112,52 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
     }
   };
 
+  const buildWhatsAppMessage = () => {
+    const lines = [
+      `*New Enterprise Quote Request - Rizqoraa Solutions*`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `👤 *Client Name:* ${contactInfo.name.trim() || 'Valued Partner'}`,
+      `🏢 *Company:* ${contactInfo.company.trim() || 'Not specified'}`,
+      `📧 *Work Email:* ${contactInfo.email.trim() || 'Not specified'}`,
+      ``,
+      `📋 *Selected Solution:* ${selectedService}`,
+      `🌐 *Source Language:* ${sourceLang}`,
+      `🎯 *Target Languages (${selectedTargetLangs.length}):* ${selectedTargetLangs.join(', ')}`,
+      `📊 *Word Count:* ${wordCount.toLocaleString()} words`,
+      `⚡ *Turnaround:* ${turnaroundOption === 'express' ? 'Express (24-48 hr)' : 'Standard Delivery'}`,
+      `⏱️ *Estimated Timeline:* ~${estimatedDays} Business Days`,
+      `💰 *Estimated Investment:* ₹${estimatedTotalCost.toLocaleString('en-IN')} (₹3/word)`,
+      ``,
+      `📝 *Project Scope / Instructions:*`,
+      `${contactInfo.notes.trim() || 'Standard enterprise localization SLA requested.'}`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `Generated via Rizqoraa Instant Quote Estimator (https://rizqoraa.com/quote)`,
+    ];
+    return lines.join('\n');
+  };
+
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setQuoteSubmitted(true);
+    if (isSubmitting) return;
+
+    if (!contactInfo.name.trim() || !contactInfo.email.trim()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const businessPhone = '918619086127';
+    const message = buildWhatsAppMessage();
+    const waUrl = `https://wa.me/${businessPhone}?text=${encodeURIComponent(message)}`;
+    setGeneratedWhatsAppUrl(waUrl);
+
+    // Open WhatsApp chat in a new tab with pre-filled message for user review
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setQuoteSubmitted(true);
+    }, 400);
   };
 
   return (
@@ -154,19 +199,31 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h2 className="text-2xl font-extrabold text-emerald-950 font-['Space_Grotesk']">
-                  Quote Request Submitted Successfully!
+                  Quote Request Compiled & WhatsApp Opened!
                 </h2>
                 <p className="text-sm text-emerald-800 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong>{contactInfo.name || 'Valued Partner'}</strong>. Your estimated quote of <strong className="text-emerald-900 text-base">₹{estimatedTotalCost.toLocaleString('en-IN')}</strong> ({wordCount.toLocaleString()} words @ ₹3/word) has been dispatched to our enterprise account executive. You will receive a formal Statement of Work (SOW) at <strong>{contactInfo.email || 'your email'}</strong> within 2 business hours.
+                  Thank you, <strong>{contactInfo.name || 'Valued Partner'}</strong>. Your estimated quote of <strong className="text-emerald-900 text-base">₹{estimatedTotalCost.toLocaleString('en-IN')}</strong> ({wordCount.toLocaleString()} words @ ₹3/word) has been compiled. WhatsApp has opened in a new tab with your pre-filled quote details ready for you to review and send.
                 </p>
 
-                <div className="pt-4 flex justify-center gap-4">
+                <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  {generatedWhatsAppUrl && (
+                    <a
+                      href={generatedWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-6 py-3.5 rounded-xl text-xs font-bold shadow-lg shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Re-open WhatsApp Chat</span>
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+                    </a>
+                  )}
                   <button
                     onClick={() => {
                       setQuoteSubmitted(false);
                       onNavigate('home');
                     }}
-                    className="bg-[#E4032E] hover:bg-[#c30226] text-white px-8 py-3.5 rounded-xl text-xs font-bold shadow-lg shadow-red-500/20 cursor-pointer transition-colors"
+                    className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-6 py-3.5 rounded-xl text-xs font-bold shadow-md cursor-pointer transition-colors"
                   >
                     Return to Homepage
                   </button>
@@ -528,10 +585,20 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
                 {/* Primary CTA Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-[#E4032E] hover:bg-[#c30226] text-white py-4 px-6 rounded-2xl text-base font-extrabold shadow-xl shadow-red-500/25 hover:shadow-red-500/40 flex items-center justify-center gap-2.5 cursor-pointer transition-all duration-200 group font-['Space_Grotesk']"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#E4032E] hover:bg-[#c30226] disabled:opacity-75 disabled:cursor-not-allowed text-white py-4 px-6 rounded-2xl text-base font-extrabold shadow-xl shadow-red-500/25 hover:shadow-red-500/40 flex items-center justify-center gap-2.5 cursor-pointer transition-all duration-200 group font-['Space_Grotesk']"
                 >
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  <span>Submit Official Quote Request</span>
+                  {isSubmitting ? (
+                    <>
+                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Preparing Quote & Opening WhatsApp...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <span>Submit & Review on WhatsApp</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}

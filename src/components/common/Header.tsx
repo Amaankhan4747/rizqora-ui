@@ -218,7 +218,9 @@ export const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100"
+              aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+              aria-expanded={mobileMenuOpen}
+              className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#E4032E]/20"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

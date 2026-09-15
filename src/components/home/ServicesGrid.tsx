@@ -155,6 +155,8 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
                     <img
                       src={service.image}
                       alt={service.name}
+                      loading="lazy"
+                      decoding="async"
                       referrerPolicy="no-referrer"
                       draggable={false}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 select-none pointer-events-none"

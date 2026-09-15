@@ -61,6 +61,7 @@ export const RizqoraaLogo: React.FC<RizqoraaLogoProps> = ({
       <img
         src={primarySrc}
         alt="Rizqoraa Logo"
+        decoding="async"
         className="w-auto h-full max-h-full object-contain transition-opacity duration-200"
         onError={(e) => {
           const target = e.currentTarget;
