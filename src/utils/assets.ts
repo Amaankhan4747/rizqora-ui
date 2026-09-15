@@ -8,6 +8,10 @@
 
 export const ASSET_PATHS = {
   images: {
+    // Favicon paths (upload or replace in public/favicon, public/favicon.ico, public/favicon.png)
+    favicon: '/favicon',
+    faviconIco: '/favicon.ico',
+    faviconPng: '/favicon.png',
     // Header logo
     logo: '/rizqoraalogo.png',
     logoRaw: '/rizqoraalogo.png',
