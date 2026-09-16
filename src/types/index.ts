@@ -33,15 +33,62 @@ export interface ServiceItem {
   isPrimary8: boolean;
 }
 
-export interface IndustryItem {
+export interface RelevantService {
   id: string;
   name: string;
+  slug: string;
+  description: string;
   iconName: string;
+}
+
+export interface IndustryWorkflowStep {
+  step: string;
+  title: string;
+  description: string;
+  deliverable: string;
+}
+
+export interface IndustryItem {
+  id: string;
+  slug?: string;
+  name: string;
+  shortName?: string;
+  iconName: string;
+  tagline?: string;
   desc: string;
+  detailedDesc?: string;
+  category?: 'Technology' | 'Regulated' | 'Consumer' | 'Industrial';
   keyChallenges: string[];
   solutionHighlights: string[];
+  localizationRequirements?: string[];
+  benefits?: string[];
+  relevantServices?: RelevantService[];
+  workflows?: IndustryWorkflowStep[];
+  globalConsiderations?: string[];
   stat: string;
   statLabel: string;
+  visualTheme?: {
+    accentColor: string;
+    badgeText: string;
+    symbol: string;
+    metricTitle: string;
+    metricValue: string;
+    type:
+      | 'technology'
+      | 'healthcare'
+      | 'finance'
+      | 'legal'
+      | 'ecommerce'
+      | 'gaming'
+      | 'education'
+      | 'manufacturing'
+      | 'travel'
+      | 'automotive'
+      | 'media'
+      | 'energy';
+  };
+  ctaText?: string;
+  featuredInHome?: boolean;
 }
 
 export interface LanguageItem {

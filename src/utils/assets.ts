@@ -16,9 +16,9 @@ export const ASSET_PATHS = {
     logo: '/rizqoraalogo.png',
     logoRaw: '/rizqoraalogo.png',
     logoAlt: '/assets/images/rizqoraalogo.png',
-    // Dedicated Footer logo (upload new file to: public/footer-logo.png)
-    footerLogo: '/footer-logo.png',
-    footerLogoAlt: '/assets/images/footer-logo.png',
+    // Dedicated Footer logo
+    footerLogo: '/rizqoraa-footer-logo.png',
+    footerLogoAlt: '/footer-logo.png',
     techBg: '/Bgmap.png',
     bgMap: '/Bgmap.png',
     globePng: '/assets/images/globe.png',

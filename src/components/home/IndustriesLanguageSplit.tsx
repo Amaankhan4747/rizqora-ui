@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { INDUSTRIES_DATA } from '../../data/mockData';
+import { INDUSTRIES_DATA, IndustryItem } from '../../data/industriesData';
 import { IconHelper } from '../common/IconHelper';
-import { ArrowRight, Globe, Layers, MapPin } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  ChevronDown,
+  ChevronUp,
+  ShieldCheck,
+  TrendingUp,
+  ExternalLink,
+} from 'lucide-react';
 import { PageId } from '../../types';
 
 interface IndustriesLanguageSplitProps {
@@ -10,104 +20,302 @@ interface IndustriesLanguageSplitProps {
 }
 
 export const IndustriesLanguageSplit: React.FC<IndustriesLanguageSplitProps> = () => {
+  // Initial active industry is 'technology'
+  const [selectedIndustryId, setSelectedIndustryId] = useState<string>('technology');
+  // State for toggling between primary 8 and all 12 industries
+  const [showAllIndustries, setShowAllIndustries] = useState<boolean>(false);
+  // Category filter state
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  const categories = ['All', 'Technology', 'Regulated', 'Consumer', 'Industrial'];
+
+  // Filter based on category and toggle
+  const filteredIndustries = INDUSTRIES_DATA.filter((item) => {
+    if (selectedCategory === 'All') return true;
+    return item.category === selectedCategory;
+  });
+
+  const displayedIndustries =
+    selectedCategory === 'All' && !showAllIndustries
+      ? filteredIndustries.filter((item) => item.featuredInHome)
+      : filteredIndustries;
+
+  const currentIndustry: IndustryItem =
+    INDUSTRIES_DATA.find((item) => item.id === selectedIndustryId) || INDUSTRIES_DATA[0];
+
   return (
-    <section className="py-20 bg-white">
+    <section id="industry-expertise-section" className="py-20 lg:py-24 bg-white border-t border-slate-100 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          
-          {/* Left Half: Industry Expertise */}
-          <div className="space-y-6 flex flex-col justify-between p-8 rounded-3xl bg-slate-50/70 border border-slate-200/80">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">
-                INDUSTRIES WE SERVE
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk'] mt-2">
-                Industry Expertise. Global Impact.
-              </h2>
-              <p className="text-sm text-slate-600 mt-2">
-                Solutions built for specialized industries where communication accuracy, security, and compliance matter most.
-              </p>
-
-              {/* Icon Grid of 8 Served Industries */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
-                {INDUSTRIES_DATA.map((ind) => (
-                  <Link
-                    key={ind.id}
-                    to={`/industries/${ind.id}`}
-                    className="p-3.5 bg-white rounded-xl border border-slate-200/70 hover:border-red-200 hover:shadow-md transition-all flex flex-col items-center text-center gap-2 group cursor-pointer"
-                  >
-                    <div className="w-9 h-9 rounded-lg bg-red-50 text-[#E4032E] flex items-center justify-center group-hover:bg-[#E4032E] group-hover:text-white transition-colors">
-                      <IconHelper name={ind.iconName} size={18} />
-                    </div>
-                    <span className="text-xs font-bold text-slate-800 group-hover:text-[#E4032E]">
-                      {ind.name}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              to="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#E4032E] hover:underline pt-4 border-t border-slate-200/60"
-            >
-              <span>Explore Industries</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+        
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-200/80 text-xs font-bold text-[#E4032E] tracking-wider uppercase mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>SPECIALIZED DOMAIN LOCALIZATION</span>
           </div>
 
-          {/* Right Half: Language Coverage */}
-          <div className="space-y-6 flex flex-col justify-between p-8 rounded-3xl bg-[#0A0A0A] text-white relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#E4032E_1px,transparent_1px)] [background-size:16px_16px]" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk'] leading-[1.15]">
+            Industry Expertise.{' '}
+            <span className="text-[#E4032E]">Global Impact.</span>
+          </h2>
 
-            <div className="relative z-10 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">
-                GLOBAL LANGUAGE COVERAGE
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-['Space_Grotesk']">
-                Every Language. Every Market.
-              </h2>
-              <p className="text-sm text-slate-300">
-                1,000+ languages supported with cultural precision, native dialect adaptation, and automated localization infrastructure.
-              </p>
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-4">
+            Rizqoraa delivers specialized language and AI solutions for global enterprise industries where communication accuracy, regulatory compliance, and security matter most.
+          </p>
 
-              <div className="my-6 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 relative">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-[#E4032E]" />
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">
-                      Regional Dialect Coverage
-                    </span>
-                  </div>
-                  <span className="px-2.5 py-1 rounded-full bg-red-500/10 text-[#E4032E] text-[10px] font-bold border border-red-500/20">
-                    100% Native Verification
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 font-semibold">EMEA</div>
-                    <div className="text-lg font-bold text-white font-['Space_Grotesk']">450+ Languages</div>
-                    <div className="text-[10px] text-slate-500 mt-1">Arabic, European, African Dialects</div>
-                  </div>
-                  <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                    <div className="text-slate-400 font-semibold">APAC</div>
-                    <div className="text-lg font-bold text-white font-['Space_Grotesk']">380+ Languages</div>
-                    <div className="text-[10px] text-slate-500 mt-1">CJK, Indic, SEA Languages</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              to="/languages"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#E4032E] hover:underline pt-4 border-t border-slate-800 relative z-10"
-            >
-              <span>Explore All 1,000+ Language Pairs</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2 pt-6">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => {
+                  setSelectedCategory(cat);
+                  // Ensure current active industry matches or defaults to first in category
+                  const firstInCat =
+                    cat === 'All'
+                      ? INDUSTRIES_DATA[0]
+                      : INDUSTRIES_DATA.find((i) => i.category === cat);
+                  if (firstInCat && currentIndustry.category !== cat && cat !== 'All') {
+                    setSelectedIndustryId(firstInCat.id);
+                  }
+                }}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                  selectedCategory === cat
+                    ? 'bg-[#141414] text-white shadow-sm'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                }`}
+              >
+                {cat === 'All' ? 'All Sectors (12)' : cat}
+              </button>
+            ))}
           </div>
         </div>
+
+        {/* Interactive Dual-Panel Exploration Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          {/* Left Column: Interactive Industry Cards Grid */}
+          <div className="lg:col-span-6 space-y-3">
+            <div className="flex items-center justify-between pb-2 text-xs font-semibold text-slate-500">
+              <span>Select an industry to preview solution blueprint:</span>
+              <span className="font-mono text-slate-400">
+                {displayedIndustries.length} of {INDUSTRIES_DATA.length} Available
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {displayedIndustries.map((ind) => {
+                const isSelected = ind.id === currentIndustry.id;
+
+                return (
+                  <div
+                    key={ind.id}
+                    onClick={() => setSelectedIndustryId(ind.id)}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer text-left flex flex-col justify-between group relative ${
+                      isSelected
+                        ? 'bg-white border-[#E4032E] shadow-lg shadow-red-500/10 ring-2 ring-red-500/20'
+                        : 'bg-slate-50/70 border-slate-200/80 hover:bg-white hover:border-slate-300 hover:shadow-md'
+                    }`}
+                  >
+                    {/* Active Accent Tag */}
+                    {isSelected && (
+                      <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-[#E4032E] text-white text-[10px] font-extrabold tracking-wider uppercase font-['Space_Grotesk']">
+                        ACTIVE PREVIEW
+                      </div>
+                    )}
+
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                            isSelected
+                              ? 'bg-[#E4032E] text-white shadow-md shadow-red-500/30'
+                              : 'bg-white text-slate-700 border border-slate-200 group-hover:border-red-200 group-hover:text-[#E4032E]'
+                          }`}
+                        >
+                          <IconHelper name={ind.iconName} size={20} />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-['Space_Grotesk']">
+                          {ind.category}
+                        </span>
+                      </div>
+
+                      <h3
+                        className={`text-base font-bold font-['Space_Grotesk'] transition-colors ${
+                          isSelected ? 'text-[#141414]' : 'text-slate-900 group-hover:text-[#E4032E]'
+                        }`}
+                      >
+                        {ind.name}
+                      </h3>
+
+                      <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed">
+                        {ind.tagline || ind.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                      <span className="font-mono text-[11px] font-bold text-slate-700">
+                        {ind.stat} <span className="text-slate-400 font-normal">Impact</span>
+                      </span>
+
+                      <Link
+                        to={`/industries/${ind.slug || ind.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 font-bold text-xs text-[#E4032E] hover:underline"
+                      >
+                        <span>Details</span>
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Expand / View All 12 Industries Toggle */}
+            {selectedCategory === 'All' && (
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowAllIndustries(!showAllIndustries)}
+                  className="w-full py-3 px-4 rounded-xl border border-slate-200 hover:border-red-300 bg-white hover:bg-red-50/40 text-xs font-bold text-slate-700 hover:text-[#E4032E] flex items-center justify-center gap-2 transition-all shadow-sm"
+                >
+                  {showAllIndustries ? (
+                    <>
+                      <span>Show Primary 8 Featured Industries</span>
+                      <ChevronUp className="w-4 h-4" />
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        Explore All 12 Specialized Industries (+Travel, Automotive, Media, Energy)
+                      </span>
+                      <ChevronDown className="w-4 h-4 text-[#E4032E]" />
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Selected Industry Detail Highlight & Blueprint */}
+          <div className="lg:col-span-6 lg:sticky lg:top-28">
+            <div className="p-7 sm:p-8 rounded-3xl bg-[#0A0A0A] text-white border border-slate-800 shadow-2xl relative overflow-hidden space-y-6">
+              {/* Subtle ambient accent glow */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#E4032E]/10 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Preview Header */}
+              <div className="relative z-10 flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-slate-800/80">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#E4032E] text-white flex items-center justify-center shadow-lg shadow-red-600/30">
+                    <IconHelper name={currentIndustry.iconName} size={24} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#E4032E] font-['Space_Grotesk']">
+                        {currentIndustry.category} SOLUTION BLUEPRINT
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700">
+                        {currentIndustry.visualTheme?.badgeText || 'ENTERPRISE CERTIFIED'}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-['Space_Grotesk'] tracking-tight mt-0.5">
+                      {currentIndustry.name}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Key Metric Badge */}
+                <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-right">
+                  <div className="text-[10px] text-slate-400 font-semibold uppercase">BENCHMARK IMPACT</div>
+                  <div className="text-xl font-black text-[#E4032E] font-['Space_Grotesk']">
+                    {currentIndustry.stat}
+                  </div>
+                </div>
+              </div>
+
+              {/* Concise Summary & Description */}
+              <div className="relative z-10 space-y-2">
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                  {currentIndustry.desc}
+                </p>
+                {currentIndustry.detailedDesc && (
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {currentIndustry.detailedDesc}
+                  </p>
+                )}
+              </div>
+
+              {/* Challenges & Solutions Grid */}
+              <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                
+                {/* Key Challenges */}
+                <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-bold text-red-400 uppercase tracking-wider font-['Space_Grotesk']">
+                    <AlertCircle className="w-4 h-4 text-red-400" />
+                    <span>Key Challenges</span>
+                  </div>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    {currentIndustry.keyChallenges.slice(0, 3).map((ch, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{ch}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Solution Highlights */}
+                <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider font-['Space_Grotesk']">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    <span>Rizqoraa Solutions</span>
+                  </div>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    {currentIndustry.solutionHighlights.slice(0, 3).map((sol, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{sol}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Proof Point / Stat Label Callout */}
+              <div className="relative z-10 p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs text-slate-300">
+                <span className="flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-[#E4032E]" />
+                  <span className="font-semibold">{currentIndustry.statLabel}</span>
+                </span>
+                <span className="font-mono text-emerald-400 font-bold">100% Guaranteed</span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="relative z-10 pt-2 flex flex-col sm:flex-row items-center gap-3">
+                <Link
+                  to={`/industries/${currentIndustry.slug || currentIndustry.id}`}
+                  className="w-full sm:flex-1 bg-[#E4032E] hover:bg-[#c30226] text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
+                >
+                  <span>{currentIndustry.ctaText || `Explore ${currentIndustry.name} Solutions`}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <Link
+                  to="/industries"
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 border border-slate-700 flex items-center justify-center gap-2 transition-all"
+                >
+                  <span>View All 12 Industries</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

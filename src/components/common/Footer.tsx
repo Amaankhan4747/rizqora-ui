@@ -14,8 +14,17 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center group py-1" aria-label="Rizqoraa Home">
-              <RizqoraaLogo height={48} variant="dark" className="group-hover:opacity-95 transition-opacity" />
+            <Link 
+              to="/" 
+              className="inline-flex items-center group" 
+              aria-label="Rizqoraa Home"
+            >
+              <img
+                src="/rizqoraa-footer-logo.png"
+                alt="Rizqoraa Solutions - Connecting Every Language, Powering Global Business"
+                decoding="async"
+                className="h-10 sm:h-12 w-auto max-w-[280px] sm:max-w-[320px] object-contain select-none transition-transform duration-200 group-hover:scale-[1.02]"
+              />
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
