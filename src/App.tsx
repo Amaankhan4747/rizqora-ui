@@ -17,6 +17,8 @@ import { SolutionDetailPage } from './pages/SolutionDetailPage';
 import { IndustriesPage } from './pages/IndustriesPage';
 import { IndustryDetailPage } from './pages/IndustryDetailPage';
 import { LanguagesPage } from './pages/LanguagesPage';
+import { LanguageDetailPage } from './pages/LanguageDetailPage';
+import { WorkflowDetailPage } from './pages/WorkflowDetailPage';
 import { TechnologyPage } from './pages/TechnologyPage';
 import { TechnologyDetailPage } from './pages/TechnologyDetailPage';
 import { AiSolutionsPage } from './pages/AiSolutionsPage';
@@ -65,6 +67,10 @@ export default function App() {
       document.title = `Careers & Talent Network | ${baseTitle}`;
     } else if (location.pathname === '/languages') {
       document.title = `Global Languages Coverage | ${baseTitle}`;
+    } else if (location.pathname.startsWith('/languages/')) {
+      document.title = `Language Localization & Dialect Profile | ${baseTitle}`;
+    } else if (location.pathname.startsWith('/workflow')) {
+      document.title = `7-Step Enterprise Workflow Architecture | ${baseTitle}`;
     } else if (location.pathname === '/ai-solutions') {
       document.title = `AI Solutions & Multilingual Data | ${baseTitle}`;
     } else if (location.pathname === '/case-studies') {
@@ -98,6 +104,12 @@ export default function App() {
     } else if (page === 'resources') {
       if (detailId) navigate(`/resources/${detailId}`);
       else navigate('/resources');
+    } else if (page === 'workflow') {
+      if (detailId) navigate(`/workflow/${detailId}`);
+      else navigate('/workflow');
+    } else if (page === 'languages') {
+      if (detailId) navigate(`/languages/${detailId}`);
+      else navigate('/languages');
     } else {
       navigate(`/${page}`);
     }
@@ -138,8 +150,15 @@ export default function App() {
           <Route path="/careers" element={<CareersPage onNavigate={handleNavigate} />} />
           <Route path="/contact" element={<ContactPage onNavigate={handleNavigate} />} />
 
-          {/* Other Core Routes */}
+          {/* Languages */}
           <Route path="/languages" element={<LanguagesPage onNavigate={handleNavigate} />} />
+          <Route path="/languages/:slug" element={<LanguageDetailPage onNavigate={handleNavigate} />} />
+
+          {/* Workflow */}
+          <Route path="/workflow" element={<WorkflowDetailPage onNavigate={handleNavigate} />} />
+          <Route path="/workflow/:slug" element={<WorkflowDetailPage onNavigate={handleNavigate} />} />
+
+          {/* Other Core Routes */}
           <Route path="/ai-solutions" element={<AiSolutionsPage onNavigate={handleNavigate} />} />
           <Route path="/blog" element={<BlogPage onNavigate={handleNavigate} />} />
           <Route path="/case-studies" element={<CaseStudiesPage onNavigate={handleNavigate} />} />
