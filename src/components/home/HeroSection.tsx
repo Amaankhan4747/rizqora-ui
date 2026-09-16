@@ -148,13 +148,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               className="absolute -top-3 left-0 sm:left-4 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] w-48 sm:w-52 z-20 transition-all duration-300 group cursor-pointer"
             >
               <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1">
-                AI Language Engine
+               LINGUISTIC TECHNOLOGY
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                98.7%
-              </div>
+
               <div className="text-xs font-semibold text-slate-500 mb-2">
-                Accuracy Score
+                QUALITY-ASSURED LANGUAGE SOLUTIONS
               </div>
               {/* Red Sparkline Graph */}
               <svg className="w-full h-8 text-[#E4032E]" viewBox="0 0 100 30" fill="none">
@@ -178,7 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Global Reach
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  10+
+                  20+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Countries
@@ -201,7 +199,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Language Coverage
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  87+
+                  150+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Languages
@@ -227,7 +225,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   Projects Delivered
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk'] tracking-tight">
-                  15+
+                  200+
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Successful Projects
