@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   FileText,
@@ -15,6 +16,7 @@ import { CMSSection, cmsArray, cmsText } from '../../lib/cmsContent';
 
 interface StepData {
   step: string;
+  slug: string;
   title: string;
   shortDesc: string;
   icon: React.ElementType;
@@ -28,6 +30,7 @@ interface WorkflowTimelineProps {
 const WORKFLOW_STEPS: StepData[] = [
   {
     step: '01',
+    slug: 'requirement',
     title: 'Requirement',
     shortDesc: 'Scope analysis, source file parsing, and glossary extraction.',
     icon: FileText,
@@ -35,6 +38,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '02',
+    slug: 'planning',
     title: 'Planning',
     shortDesc: 'Language pair mapping and linguist team allocation.',
     icon: Target,
@@ -42,6 +46,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '03',
+    slug: 'translation',
     title: 'Translation',
     shortDesc: 'Neural Machine Translation paired with Translation Memory.',
     icon: Cpu,
@@ -49,6 +54,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '04',
+    slug: 'localization',
     title: 'Localization',
     shortDesc: 'Cultural adaptation, formatting, and UI fitting.',
     icon: Globe2,
@@ -56,6 +62,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '05',
+    slug: 'quality-review',
     title: 'Quality Review',
     shortDesc: 'ISO 17100 certified post-editing and LQA verification.',
     icon: ShieldCheck,
@@ -63,6 +70,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '06',
+    slug: 'delivery',
     title: 'Delivery',
     shortDesc: 'Multi-format export and automated API dispatch.',
     icon: Send,
@@ -70,6 +78,7 @@ const WORKFLOW_STEPS: StepData[] = [
   },
   {
     step: '07',
+    slug: 'long-term-support',
     title: 'Long-Term Support',
     shortDesc: 'Continuous TM maintenance, engine learning, and 24/7 PM.',
     icon: Headphones,
@@ -92,6 +101,7 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
   const workflowSteps = cmsArray(cms?.steps, WORKFLOW_STEPS).map((step: any, index) => ({
     ...step,
     step: step.step || String(index + 1).padStart(2, '0'),
+    slug: step.slug || WORKFLOW_STEPS[index]?.slug || 'requirement',
     shortDesc: step.shortDesc || step.description || step.desc,
     deliverables: step.deliverables || step.tags || [],
     icon: typeof step.icon === 'string' ? workflowIconMap[step.icon] || WORKFLOW_STEPS[index]?.icon || FileText : step.icon,
@@ -241,10 +251,17 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
                     <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </div>
 
-                  <button
-                    type="button"
+                  <div
+                    role="button"
+                    tabIndex={0}
                     onClick={() => setActiveStep(index)}
-                    className={`group w-full rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/70 ${
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setActiveStep(index);
+                      }
+                    }}
+                    className={`group w-full rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/70 ${
                       isActive
                         ? 'border-[#E4032E] bg-gradient-to-r from-[#E4032E]/14 via-white/[0.065] to-white/[0.035] shadow-[0_14px_34px_rgba(228,3,46,0.18)]'
                         : 'border-white/10 bg-white/[0.035] hover:-translate-y-0.5 hover:border-[#E4032E]/70 hover:bg-white/[0.055] hover:shadow-[0_12px_28px_rgba(228,3,46,0.12)]'
@@ -267,7 +284,7 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
 
                       <div className="flex shrink-0 items-center justify-between gap-3 sm:min-w-[250px]">
                         <div className="flex flex-wrap gap-1.5">
-                          {item.deliverables.slice(0, 2).map((tag) => (
+                          {item.deliverables.slice(0, 2).map((tag: string) => (
                             <span
                               key={tag}
                               className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-[11px] font-semibold text-slate-300 transition-colors group-hover:border-[#E4032E]/30 group-hover:text-white"
@@ -277,19 +294,23 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
                           ))}
                         </div>
 
-                        <span
-                          className={`inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-bold transition-all duration-300 ${
+                        <Link
+                          to={`/workflow/${item.slug}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                          className={`inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-bold transition-all duration-300 px-3 py-1.5 rounded-lg border ${
                             isActive
-                              ? 'text-[#E4032E]'
-                              : 'text-slate-500 group-hover:text-[#E4032E] group-hover:translate-x-0.5'
+                              ? 'border-[#E4032E] bg-[#E4032E] text-white shadow-[0_0_14px_rgba(228,3,46,0.5)]'
+                              : 'border-white/10 bg-white/[0.04] text-slate-300 hover:border-[#E4032E] hover:text-[#E4032E]'
                           }`}
                         >
-                          View Details
+                          <span>View Details</span>
                           <ArrowUpRight className="h-3.5 w-3.5" />
-                        </span>
+                        </Link>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 </motion.article>
               );
             })}

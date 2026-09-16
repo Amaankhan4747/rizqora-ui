@@ -12,3 +12,29 @@
 .animate-marquee {
   animation: marquee 35s linear infinite;
 }
+
+/* Script-aware font fallbacks for multilingual precision */
+.font-script-arabic {
+  font-family: 'Noto Sans Arabic', 'Amiri', 'Traditional Arabic', 'Segoe UI', Tahoma, sans-serif;
+}
+
+.font-script-devanagari {
+  font-family: 'Noto Sans Devanagari', 'Mangal', 'Segoe UI', sans-serif;
+}
+
+.font-script-cjk {
+  font-family: 'Noto Sans CJK SC', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans JP', 'Meiryo', 'Malgun Gothic', sans-serif;
+}
+
+.font-script-cyrillic {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-script-hebrew {
+  font-family: 'Noto Sans Hebrew', 'Arial Hebrew', 'Segoe UI', sans-serif;
+}
+
+.font-script-indic {
+  font-family: 'Noto Sans Devanagari', 'Noto Sans Bengali', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gurmukhi', 'Noto Sans Gujarati', sans-serif;
+}
+

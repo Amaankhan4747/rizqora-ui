@@ -164,6 +164,32 @@ export const Header: React.FC = () => {
               )}
             </div>
 
+            {/* Languages */}
+            <Link
+              to="/languages"
+              onClick={closeMenus}
+              className={`px-3 py-1.5 text-sm font-semibold rounded-md transition-colors ${
+                location.pathname.startsWith('/languages')
+                  ? 'text-[#E4032E] bg-red-50/60'
+                  : 'text-slate-700 hover:text-[#141414] hover:bg-slate-50'
+              }`}
+            >
+              Languages
+            </Link>
+
+            {/* Workflow */}
+            <Link
+              to="/workflow"
+              onClick={closeMenus}
+              className={`px-3 py-1.5 text-sm font-semibold rounded-md transition-colors ${
+                location.pathname.startsWith('/workflow')
+                  ? 'text-[#E4032E] bg-red-50/60'
+                  : 'text-slate-700 hover:text-[#141414] hover:bg-slate-50'
+              }`}
+            >
+              Workflow
+            </Link>
+
             {/* Technology */}
             <Link
               to="/technology"
@@ -257,6 +283,20 @@ export const Header: React.FC = () => {
             className="block py-2 text-sm font-bold text-slate-800"
           >
             Industries
+          </Link>
+          <Link
+            to="/languages"
+            onClick={closeMenus}
+            className="block py-2 text-sm font-bold text-slate-800"
+          >
+            Languages
+          </Link>
+          <Link
+            to="/workflow"
+            onClick={closeMenus}
+            className="block py-2 text-sm font-bold text-slate-800"
+          >
+            Workflow
           </Link>
           <Link
             to="/technology"

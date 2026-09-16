@@ -6,6 +6,9 @@ export type PageId =
   | 'industries'
   | 'industry-detail'
   | 'languages'
+  | 'language-detail'
+  | 'workflow'
+  | 'workflow-detail'
   | 'technology'
   | 'ai-solutions'
   | 'resources'
@@ -51,6 +54,57 @@ export interface LanguageItem {
   script: string;
   accuracyRate: string;
   popularPair: boolean;
+}
+
+export interface LanguageDetail extends LanguageItem {
+  slug: string;
+  direction?: 'ltr' | 'rtl';
+  scriptType: 'latin' | 'arabic' | 'devanagari' | 'cjk' | 'cyrillic' | 'hebrew' | 'greek' | 'indic' | 'other';
+  subRegion?: string;
+  countries: string[];
+  dialects?: string[];
+  description: string;
+  culturalNuance: string;
+  commonMarkets: string[];
+  supportedServices: string[];
+  enterpriseUseCases: string[];
+  samplePhrase?: {
+    original: string;
+    translation: string;
+  };
+}
+
+export interface WorkflowStepDetail {
+  step: string;
+  slug: string;
+  title: string;
+  shortDesc: string;
+  heroTagline: string;
+  overview: string;
+  deliverables: string[];
+  keyActivities: {
+    title: string;
+    desc: string;
+  }[];
+  benefits: {
+    title: string;
+    desc: string;
+  }[];
+  qualityCheckpoints: string[];
+  relatedServices: {
+    name: string;
+    slug: string;
+  }[];
+  nextStep?: {
+    step: string;
+    title: string;
+    slug: string;
+  };
+  prevStep?: {
+    step: string;
+    title: string;
+    slug: string;
+  };
 }
 
 export interface BlogPost {

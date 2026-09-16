@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { HeroSection } from '../components/home/HeroSection';
 import { ServicesGrid } from '../components/home/ServicesGrid';
 import { WorkflowTimeline } from '../components/home/WorkflowTimeline';
+import { LanguagesSection } from '../components/home/LanguagesSection';
 import { IndustriesLanguageSplit } from '../components/home/IndustriesLanguageSplit';
 import { ValuePropositionStrip } from '../components/home/ValuePropositionStrip';
 import { TechnologyBand } from '../components/home/TechnologyBand';
@@ -25,20 +26,24 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 03 Workflow / Process Timeline */}
       <WorkflowTimeline />
 
-      {/* 04 Industries + Language Coverage Split */}
+      {/* 04 Dedicated Languages Section */}
+      <LanguagesSection />
+
+      {/* 05 Industries + Language Coverage Split */}
       <IndustriesLanguageSplit onNavigate={onNavigate} />
 
-      {/* 05 Value Proposition Strip */}
+      {/* 06 Value Proposition Strip */}
       <ValuePropositionStrip />
 
-      {/* 06 Technology Band */}
+      {/* 07 Technology Band */}
       <TechnologyBand onNavigate={onNavigate} />
 
-      {/* 07 Social Proof Trio */}
+      {/* 08 Social Proof Trio */}
       <SocialProofTrio onNavigate={onNavigate} />
 
-      {/* 08 Final Call-to-Action Band */}
+      {/* 09 Final Call-to-Action Band */}
       <FinalCtaBand onNavigate={onNavigate} />
     </div>
   );
 };
+
