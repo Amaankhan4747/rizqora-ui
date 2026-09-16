@@ -44,9 +44,9 @@ export const Header: React.FC = () => {
   aria-label="Rizqoraa Home"
 >
   <RizqoraaLogo
-    height={35}
+    height={45}
     variant="light"
-    className="scale-[1.35] origin-left group-hover:opacity-95 transition-opacity"
+    className="scale-[1.52] origin-left group-hover:opacity-99 transition-opacity"
   />
 </Link>
 
