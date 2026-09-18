@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageId } from '../../types';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { ASSET_PATHS } from '../../utils/assets';
 
 interface FinalCtaBandProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -9,7 +10,21 @@ interface FinalCtaBandProps {
 export const FinalCtaBand: React.FC<FinalCtaBandProps> = ({ onNavigate }) => {
   return (
     <section className="py-24 bg-[#0A0A0A] text-white relative overflow-hidden border-t border-slate-800">
-      {/* Background Animated Line Art Grid */}
+      {/* Background Image - with proper background-size: cover behavior preventing distortion */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-85 transition-opacity duration-300"
+        style={{
+          backgroundImage: `url('${ASSET_PATHS.images.ctaBg}'), url('/Bgmap.png')`,
+        }}
+      />
+
+      {/* Approximately 20% Black Fade/Overlay ensuring text and CTAs remain clearly readable */}
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
+      {/* Subtle top/bottom fade for smooth border transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-transparent to-[#0A0A0A]/60 pointer-events-none" />
+
+      {/* Existing Background Animated Line Art Grid & Red Ambient Lighting */}
       <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#E4032E_1.5px,transparent_1.5px)] [background-size:32px_32px] pointer-events-none" />
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none" />
 

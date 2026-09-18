@@ -22,6 +22,10 @@ export const ASSET_PATHS = {
     techBg: '/Bgmap.png',
     bgMap: '/Bgmap.png',
     globePng: '/assets/images/globe.png',
+    // CTA Section background image
+    ctaBg: '/images/cta/cta-background.png',
+    // Solutions Detail Pages: Enterprise Language Solution background image
+    solutionsEnterpriseBg: '/images/solutions/enterprise-language-solution.jpg',
   },
   videos: {
     globeMp4: '/assets/videos/globe.mp4',

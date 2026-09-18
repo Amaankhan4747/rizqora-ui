@@ -132,20 +132,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right Hero Visual (3D Globe + Floating Stat Cards) */}
-          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[460px] sm:min-h-[540px]">
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[460px] sm:min-h-[540px] lg:min-h-[620px] overflow-visible">
             {/* Radial Red Ambient Glow behind Globe */}
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 via-red-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 via-red-500/10 to-transparent rounded-full blur-3xl pointer-events-none scale-110" />
 
-            {/* Realistic Dark 3D Globe Media Visual */}
-            <Globe3D mediaSrc="/assets/gifs/globe.gif" />
+            {/* Realistic Dark 3D Globe Media Visual - Moderately enlarged on desktop, scaled proportionally on tablet & mobile */}
+            <Globe3D 
+              mediaSrc="/assets/gifs/globe.gif" 
+              className="scale-100 sm:scale-105 lg:scale-115 xl:scale-120 transition-transform duration-300"
+            />
 
-            {/* Floating Stat Cards Surrounding Globe (Matching Reference Image exact composition) */}
+            {/* Floating Stat Cards Surrounding Globe (Preserved exact content & animation with responsive alignment) */}
             
             {/* Card 1: Top Left - AI Accuracy Score */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -top-3 left-0 sm:left-4 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] w-48 sm:w-52 z-20 transition-all duration-300 group cursor-pointer"
+              className="absolute -top-3 left-0 sm:left-2 lg:-left-3 bg-white/95 backdrop-blur-xl p-3.5 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] w-44 sm:w-52 z-20 transition-all duration-300 group cursor-pointer origin-top-left scale-[0.85] xs:scale-90 sm:scale-100"
             >
               <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1">
                LINGUISTIC TECHNOLOGY
@@ -169,7 +172,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              className="absolute top-2 right-0 sm:right-4 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-3 z-20 transition-all duration-300 group cursor-pointer"
+              className="absolute top-2 right-0 sm:right-2 lg:-right-3 bg-white/95 backdrop-blur-xl p-3.5 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-3 z-20 transition-all duration-300 group cursor-pointer origin-top-right scale-[0.85] xs:scale-90 sm:scale-100"
             >
               <div>
                 <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">
@@ -192,7 +195,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             <motion.div
               animate={{ y: [0, -9, 0] }}
               transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-              className="absolute bottom-6 left-2 sm:left-6 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-4 z-20 transition-all duration-300 group cursor-pointer"
+              className="absolute bottom-6 left-1 sm:left-4 lg:-left-2 bg-white/95 backdrop-blur-xl p-3.5 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-4 z-20 transition-all duration-300 group cursor-pointer origin-bottom-left scale-[0.85] xs:scale-90 sm:scale-100"
             >
               <div>
                 <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">
@@ -218,7 +221,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             <motion.div
               animate={{ y: [0, -11, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-              className="absolute bottom-2 right-2 sm:right-6 bg-white/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-4 z-20 transition-all duration-300 group cursor-pointer"
+              className="absolute bottom-2 right-1 sm:right-4 lg:-right-2 bg-white/95 backdrop-blur-xl p-3.5 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-white/90 hover:border-red-400 hover:shadow-[0_25px_60px_rgba(228,3,46,0.22)] flex items-center justify-between gap-4 z-20 transition-all duration-300 group cursor-pointer origin-bottom-right scale-[0.85] xs:scale-90 sm:scale-100"
             >
               <div>
                 <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">

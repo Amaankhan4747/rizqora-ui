@@ -249,6 +249,8 @@ export interface Globe3DProps {
   mediaSrc?: string;
   /** Accessible label */
   alt?: string;
+  /** Optional custom container class names for responsive sizing */
+  className?: string;
 }
 
 const DEFAULT_MEDIA_CANDIDATES = [
@@ -270,6 +272,7 @@ const DEFAULT_MEDIA_CANDIDATES = [
 export const Globe3D: React.FC<Globe3DProps> = ({
   mediaSrc,
   alt = 'Interactive Globe Visual',
+  className = '',
 }) => {
   // Build ordered list of candidates to try
   const candidateList = React.useMemo(() => {
@@ -324,7 +327,7 @@ export const Globe3D: React.FC<Globe3DProps> = ({
   }, [allFailed, isVideo, currentSrc]);
 
   return (
-    <div className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center select-none">
+    <div className={`relative w-full aspect-square max-w-[310px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[620px] xl:max-w-[660px] mx-auto flex items-center justify-center select-none ${className}`}>
       {/* Globe Media Visual Container - Transparent, no black background disc */}
       <div className="w-full h-full flex items-center justify-center relative">
         {!allFailed && currentSrc ? (

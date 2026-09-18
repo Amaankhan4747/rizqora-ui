@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { SERVICES_DATA } from '../data/mockData';
 import { IconHelper } from '../components/common/IconHelper';
+import { ASSET_PATHS } from '../utils/assets';
 import {
   ArrowRight,
   CheckCircle2,
@@ -56,8 +57,20 @@ export const SolutionDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="bg-slate-900 text-white py-16 sm:py-20 relative overflow-hidden">
+      {/* Hero Section with Background Image Capability & Gradient Fallback */}
+      <section className="bg-slate-900 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
+        {/* Background Image layer referencing public path: /images/solutions/enterprise-language-solution.jpg */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+          style={{
+            backgroundImage: `url('${ASSET_PATHS.images.solutionsEnterpriseBg}')`,
+          }}
+        />
+
+        {/* Subtle Dark Overlay ensuring text remains completely readable */}
+        <div className="absolute inset-0 bg-slate-950/75 sm:bg-slate-950/70 pointer-events-none" />
+
+        {/* Existing Red Ambient Radial Glow */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#E4032E]/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-5">
