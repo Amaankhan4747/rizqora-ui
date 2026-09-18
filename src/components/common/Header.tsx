@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SERVICES_DATA, INDUSTRIES_DATA } from '../../data/mockData';
-import { ChevronDown, Globe, Menu, X, ArrowRight } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import { RizqoraaLogo } from './RizqoraaLogo';
 
 export const Header: React.FC = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   const [solutionsHovered, setSolutionsHovered] = useState(false);
   const [industriesHovered, setIndustriesHovered] = useState(false);
   const [selectedLang, setSelectedLang] = useState('EN');
@@ -19,8 +21,27 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close menus on route change
+  useEffect(() => {
+    closeMenus();
+  }, [location.pathname]);
+
   const closeMenus = () => {
     setMobileMenuOpen(false);
+    setMobileSolutionsOpen(false);
+    setMobileIndustriesOpen(false);
     setSolutionsHovered(false);
     setIndustriesHovered(false);
   };
@@ -38,17 +59,17 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link
-  to="/"
-  onClick={closeMenus}
-  className="flex items-center group py-1"
-  aria-label="Rizqoraa Home"
->
-  <RizqoraaLogo
-    height={45}
-    variant="light"
-    className="scale-[1.52] origin-left group-hover:opacity-99 transition-opacity"
-  />
-</Link>
+            to="/"
+            onClick={closeMenus}
+            className="flex items-center group py-1"
+            aria-label="Rizqoraa Home"
+          >
+            <RizqoraaLogo
+              height={40}
+              variant="light"
+              className="scale-[1.22] xs:scale-[1.35] sm:scale-[1.52] origin-left group-hover:opacity-95 transition-opacity"
+            />
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
@@ -256,76 +277,167 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
-          <Link
-            to="/solutions"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Solutions
-          </Link>
-          <div className="pl-4 space-y-1.5 border-l-2 border-slate-100">
-            {SERVICES_DATA.map((s) => (
-              <Link
-                key={s.id}
-                to={`/solutions/${getServiceSlug(s.id)}`}
-                onClick={closeMenus}
-                className="block py-1 text-xs text-slate-600 hover:text-[#E4032E]"
-              >
-                {s.name}
-              </Link>
-            ))}
+        <div className="md:hidden bg-white/98 backdrop-blur-xl border-b border-slate-200 px-4 sm:px-6 pt-3 pb-8 max-h-[calc(100vh-72px)] overflow-y-auto shadow-2xl space-y-1 divide-y divide-slate-100">
+          {/* Solutions Accordion */}
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+              aria-label={mobileSolutionsOpen ? "Collapse Solutions submenu" : "Expand Solutions submenu"}
+              aria-expanded={mobileSolutionsOpen}
+              className="w-full flex items-center justify-between py-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/30 rounded-lg transition-colors"
+            >
+              <span className={`text-base font-bold transition-colors ${
+                mobileSolutionsOpen ? 'text-[#E4032E]' : 'text-slate-800 group-hover:text-[#E4032E]'
+              }`}>
+                Solutions
+              </span>
+              <span className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-500 group-hover:text-[#E4032E] rounded-lg transition-colors">
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    mobileSolutionsOpen ? 'rotate-180 text-[#E4032E]' : ''
+                  }`}
+                />
+              </span>
+            </button>
+
+            {mobileSolutionsOpen && (
+              <div className="pl-3 pr-1 pb-3 pt-1 space-y-1 border-l-2 border-red-500/30 ml-2 mb-2 bg-slate-50/50 rounded-r-xl">
+                <Link
+                  to="/solutions"
+                  onClick={closeMenus}
+                  className="flex items-center justify-between py-2 px-3 text-xs font-bold text-[#E4032E] rounded-lg hover:bg-red-50/60 transition-colors"
+                >
+                  <span>All Enterprise Solutions</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                {SERVICES_DATA.map((s) => (
+                  <Link
+                    key={s.id}
+                    to={`/solutions/${getServiceSlug(s.id)}`}
+                    onClick={closeMenus}
+                    className="block py-2 px-3 text-xs font-semibold text-slate-700 hover:text-[#E4032E] hover:bg-slate-100/70 rounded-lg transition-colors"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
-          <Link
-            to="/industries"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Industries
-          </Link>
-          <Link
-            to="/languages"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Languages
-          </Link>
-          <Link
-            to="/workflow"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Workflow
-          </Link>
-          <Link
-            to="/technology"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Technology
-          </Link>
-          <Link
-            to="/resources"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Resources
-          </Link>
-          <Link
-            to="/about"
-            onClick={closeMenus}
-            className="block py-2 text-sm font-bold text-slate-800"
-          >
-            Company
-          </Link>
-          <Link
-            to="/quote"
-            onClick={closeMenus}
-            className="block text-center bg-[#E4032E] text-white py-2.5 rounded-xl text-xs font-bold mt-4"
-          >
-            Request Quote
-          </Link>
+          {/* Industries Accordion */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+              aria-label={mobileIndustriesOpen ? "Collapse Industries submenu" : "Expand Industries submenu"}
+              aria-expanded={mobileIndustriesOpen}
+              className="w-full flex items-center justify-between py-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/30 rounded-lg transition-colors"
+            >
+              <span className={`text-base font-bold transition-colors ${
+                mobileIndustriesOpen ? 'text-[#E4032E]' : 'text-slate-800 group-hover:text-[#E4032E]'
+              }`}>
+                Industries
+              </span>
+              <span className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-500 group-hover:text-[#E4032E] rounded-lg transition-colors">
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    mobileIndustriesOpen ? 'rotate-180 text-[#E4032E]' : ''
+                  }`}
+                />
+              </span>
+            </button>
+
+            {mobileIndustriesOpen && (
+              <div className="pl-3 pr-1 pb-3 pt-1 space-y-1 border-l-2 border-red-500/30 ml-2 mb-2 bg-slate-50/50 rounded-r-xl">
+                <Link
+                  to="/industries"
+                  onClick={closeMenus}
+                  className="flex items-center justify-between py-2 px-3 text-xs font-bold text-[#E4032E] rounded-lg hover:bg-red-50/60 transition-colors"
+                >
+                  <span>All Specialized Industries</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                {INDUSTRIES_DATA.map((ind) => (
+                  <Link
+                    key={ind.id}
+                    to={`/industries/${ind.id}`}
+                    onClick={closeMenus}
+                    className="block py-2 px-3 text-xs font-semibold text-slate-700 hover:text-[#E4032E] hover:bg-slate-100/70 rounded-lg transition-colors"
+                  >
+                    {ind.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Languages */}
+          <div>
+            <Link
+              to="/languages"
+              onClick={closeMenus}
+              className="block py-3 text-base font-bold text-slate-800 hover:text-[#E4032E] transition-colors"
+            >
+              Languages
+            </Link>
+          </div>
+
+          {/* Workflow */}
+          <div>
+            <Link
+              to="/workflow"
+              onClick={closeMenus}
+              className="block py-3 text-base font-bold text-slate-800 hover:text-[#E4032E] transition-colors"
+            >
+              Workflow
+            </Link>
+          </div>
+
+          {/* Technology */}
+          <div>
+            <Link
+              to="/technology"
+              onClick={closeMenus}
+              className="block py-3 text-base font-bold text-slate-800 hover:text-[#E4032E] transition-colors"
+            >
+              Technology
+            </Link>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <Link
+              to="/resources"
+              onClick={closeMenus}
+              className="block py-3 text-base font-bold text-slate-800 hover:text-[#E4032E] transition-colors"
+            >
+              Resources
+            </Link>
+          </div>
+
+          {/* Company */}
+          <div>
+            <Link
+              to="/about"
+              onClick={closeMenus}
+              className="block py-3 text-base font-bold text-slate-800 hover:text-[#E4032E] transition-colors"
+            >
+              Company
+            </Link>
+          </div>
+
+          {/* Request Quote Action */}
+          <div className="pt-4 border-t border-slate-100">
+            <Link
+              to="/quote"
+              onClick={closeMenus}
+              className="flex items-center justify-center gap-2 w-full bg-[#E4032E] hover:bg-[#c30226] text-white py-3.5 px-6 rounded-xl text-sm font-bold shadow-lg shadow-red-500/25 active:scale-[0.98] transition-all"
+            >
+              <span>Request Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       )}
     </header>

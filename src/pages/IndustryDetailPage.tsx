@@ -11,7 +11,7 @@ import {
   Sparkles,
   ShieldCheck,
   Award,
-  Globe2,
+  Languages,
   Layers,
   FileCheck,
   TrendingUp,
@@ -358,7 +358,7 @@ export const IndustryDetailPage: React.FC = () => {
             {industry.globalConsiderations && (
               <div className="p-7 rounded-3xl bg-slate-950 text-white border border-slate-800 space-y-4">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#E4032E] uppercase tracking-wider font-['Space_Grotesk']">
-                  <Globe2 className="w-4 h-4 text-[#E4032E]" />
+                  <Languages className="w-4 h-4 text-[#E4032E]" />
                   <span>Global & Cross-Cultural Considerations</span>
                 </div>
                 <div className="space-y-2">

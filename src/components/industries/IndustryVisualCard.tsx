@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowRight,
-  Globe2,
   Radio,
   Cpu,
   Fingerprint,

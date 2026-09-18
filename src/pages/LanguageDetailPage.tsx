@@ -9,7 +9,7 @@ import { getScriptFontClass } from '../utils/languageHelpers';
 import {
   ArrowLeft,
   ArrowRight,
-  Globe,
+  Languages,
   CheckCircle2,
   ShieldCheck,
   Zap,
@@ -44,7 +44,7 @@ export const LanguageDetailPage: React.FC<LanguageDetailPageProps> = () => {
       <div className="min-h-screen pt-32 pb-20 bg-white text-[#141414] flex items-center justify-center">
         <div className="text-center max-w-md px-4 space-y-4">
           <div className="w-12 h-12 rounded-2xl bg-red-50 text-[#E4032E] flex items-center justify-center mx-auto">
-            <Globe className="w-6 h-6" />
+            <Languages className="w-6 h-6" />
           </div>
           <h2 className="text-2xl font-black font-['Space_Grotesk'] text-[#141414]">
             Language Not Found

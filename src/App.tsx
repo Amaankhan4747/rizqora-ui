@@ -116,12 +116,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#141414] font-['Plus_Jakarta_Sans',sans-serif] flex flex-col justify-between selection:bg-[#E4032E] selection:text-white">
+    <div className="min-h-screen bg-white text-[#141414] font-['Plus_Jakarta_Sans',sans-serif] flex flex-col justify-between selection:bg-[#E4032E] selection:text-white overflow-x-hidden w-full">
       {/* Persistent Navigation Bar */}
       <Header />
 
       {/* Main Page Router View */}
-      <main className="flex-grow">
+      <main className="flex-grow overflow-x-hidden w-full">
         <Routes>
           {/* Home */}
           <Route path="/" element={<HomePage onNavigate={handleNavigate} />} />

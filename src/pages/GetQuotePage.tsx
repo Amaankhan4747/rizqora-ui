@@ -146,7 +146,7 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
 
     setIsSubmitting(true);
 
-    const businessPhone = '918619086127';
+    const businessPhone = '919950464005';
     const message = buildWhatsAppMessage();
     const waUrl = `https://wa.me/${businessPhone}?text=${encodeURIComponent(message)}`;
     setGeneratedWhatsAppUrl(waUrl);

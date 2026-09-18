@@ -3,7 +3,6 @@ import { PageId } from '../types';
 import { TECH_TILES } from '../data/mockData';
 import { IconHelper } from '../components/common/IconHelper';
 import { ShieldCheck, Cpu, Lock, Workflow, CheckCircle2, ArrowRight } from 'lucide-react';
-import { ASSET_PATHS } from '../utils/assets';
 
 interface TechnologyPageProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -21,16 +20,27 @@ export const TechnologyPage: React.FC<TechnologyPageProps> = ({ onNavigate }) =>
 
   return (
     <div className="pt-28 pb-20 bg-white">
-      {/* Header Banner */}
-      <section className="bg-[#0A0A0A] text-white py-20 border-b border-slate-800 relative overflow-hidden">
-        {/* Background Image: World Map Network */}
+      {/* Header Banner - Enterprise AI/Tech Aesthetic (No World/Globe visual) */}
+      <section className="bg-[#0A0A0A] text-white py-16 sm:py-20 border-b border-slate-800 relative overflow-hidden">
+        {/* Soft Red Ambient Radial Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-72 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(228,3,46,0.22),transparent)] pointer-events-none" />
+        
+        {/* Subtle Tech Matrix Grid Accent */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-          style={{ backgroundImage: `url('${ASSET_PATHS.images.techBg}')` }}
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
         />
-        {/* Subtle ~15-20% black fade overlay keeping world map visible & premium */}
-        <div className="absolute inset-0 bg-black/18 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]/40 pointer-events-none" />
+
+        {/* Fine Technical Corner Accents */}
+        <div className="absolute top-4 left-6 text-slate-800 font-mono text-[9px] uppercase tracking-widest hidden sm:block pointer-events-none">
+          SECURE_NMT_PIPELINE // v4.2
+        </div>
+        <div className="absolute top-4 right-6 text-slate-800 font-mono text-[9px] uppercase tracking-widest hidden sm:block pointer-events-none">
+          AES-256 // ZERO-RETENTION
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4 relative z-10">
           <span className="text-xs font-bold uppercase tracking-widest text-[#E4032E]">

@@ -68,10 +68,10 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-14 bg-white border-b border-slate-100 select-none">
+    <section className="py-10 sm:py-14 bg-white border-b border-slate-100 select-none overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div className="space-y-1.5 max-w-2xl">
             <div className="inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4032E]" />
@@ -87,9 +87,9 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 self-start sm:self-auto">
-            {/* Slider Navigation Arrows */}
-            <div className="flex items-center gap-1.5">
+          <div className="flex items-center justify-end gap-2.5 w-full sm:w-auto">
+            {/* Slider Navigation Arrows - Desktop Only (Hidden on mobile) */}
+            <div className="hidden sm:flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => scroll('left')}
@@ -110,10 +110,10 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
 
             <Link
               to="/solutions"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-red-50 hover:text-[#E4032E] border border-slate-200/80 hover:border-red-200 transition-all shadow-xs shrink-0 group"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold text-slate-900 sm:text-slate-800 bg-white sm:bg-slate-50 hover:bg-red-50 hover:text-[#E4032E] border border-slate-200 sm:border-slate-200/80 hover:border-red-200 transition-all shadow-xs shrink-0 group min-h-[42px] sm:min-h-0"
             >
               <span>View All Services</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#E4032E] group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#E4032E] group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
@@ -125,7 +125,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
-          className={`flex gap-4 overflow-x-auto pb-4 pt-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+          className={`flex gap-3 sm:gap-4 overflow-x-auto pb-4 pt-1 touch-pan-x overscroll-x-contain no-scrollbar snap-x snap-mandatory sm:snap-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
             isMouseDown ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{ scrollBehavior: isMouseDown ? 'auto' : 'smooth' }}
@@ -136,13 +136,13 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
               to={`/solutions/${getSlug(service.id)}`}
               onClick={handleLinkClick}
               draggable={false}
-              className="w-[280px] sm:w-[300px] shrink-0 group relative bg-slate-50/60 hover:bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 hover:border-red-300 hover:shadow-md hover:shadow-red-500/5 transform hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between"
+              className="w-[82vw] max-w-[280px] xs:max-w-[300px] sm:w-[300px] shrink-0 snap-start sm:snap-align-none group relative bg-slate-50/60 hover:bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200/80 hover:border-red-300 hover:shadow-md hover:shadow-red-500/5 transform hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between"
             >
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {/* Top Row: Icon + Arrow Indicator */}
                 <div className="flex items-center justify-between">
-                  <div className="w-9 h-9 rounded-xl bg-white shadow-xs border border-slate-200/70 text-[#E4032E] flex items-center justify-center group-hover:bg-[#E4032E] group-hover:text-white group-hover:border-[#E4032E] transition-all duration-200">
-                    <IconHelper name={service.iconName} size={18} />
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-white shadow-xs border border-slate-200/70 text-[#E4032E] flex items-center justify-center group-hover:bg-[#E4032E] group-hover:text-white group-hover:border-[#E4032E] transition-all duration-200">
+                    <IconHelper name={service.iconName} size={16} />
                   </div>
                   <div className="w-6 h-6 rounded-lg text-slate-400 group-hover:text-[#E4032E] group-hover:bg-red-50 flex items-center justify-center transition-colors">
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
 
                 {/* Optional Service Visual Image (for Translation, Localization, AI Data Annotation) */}
                 {service.image && (
-                  <div className="w-full h-28 sm:h-32 rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 relative">
+                  <div className="w-full h-24 sm:h-32 rounded-lg sm:rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 relative">
                     <img
                       src={service.image}
                       alt={service.name}
@@ -171,13 +171,13 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
                 </h3>
 
                 {/* Service Description */}
-                <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed line-clamp-2">
                   {service.oneLineDesc}
                 </p>
               </div>
 
               {/* Bottom Learn More Link */}
-              <div className="pt-3 mt-3 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-bold text-slate-600 group-hover:text-[#E4032E] transition-colors">
+              <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-bold text-slate-600 group-hover:text-[#E4032E] transition-colors">
                 <span>Learn More</span>
                 <ArrowRight className="w-3 h-3 text-[#E4032E] group-hover:translate-x-1 transition-transform" />
               </div>

@@ -195,7 +195,7 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
             </div>
           </div>
 
-          <div className="md:hidden flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+          <div className="md:hidden flex gap-2 overflow-x-auto pb-2 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
             {workflowSteps.map((item, index) => {
               const isActive = activeStep === index;
 
@@ -218,9 +218,9 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-5 sm:left-6 top-2 bottom-2 w-px bg-slate-800" />
+          <div className="absolute left-4.5 xs:left-5 sm:left-6 top-2 bottom-2 w-px bg-slate-800" />
           <motion.div
-            className="absolute left-5 sm:left-6 top-2 w-px bg-gradient-to-b from-[#E4032E] to-red-500/30 shadow-[0_0_12px_rgba(228,3,46,0.45)]"
+            className="absolute left-4.5 xs:left-5 sm:left-6 top-2 w-px bg-gradient-to-b from-[#E4032E] to-red-500/30 shadow-[0_0_12px_rgba(228,3,46,0.45)]"
             animate={{ height: progress }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           />
@@ -239,10 +239,10 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
                   viewport={{ amount: 0.65, margin: '-20% 0px -35% 0px' }}
                   transition={{ duration: 0.28, delay: index * 0.035 }}
                   onMouseEnter={() => setActiveStep(index)}
-                  className="relative pl-14 sm:pl-16"
+                  className="relative pl-12 xs:pl-14 sm:pl-16"
                 >
                   <div
-                    className={`absolute left-0 top-1.5 z-10 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-full border transition-all duration-300 ${
+                    className={`absolute left-0 top-1.5 z-10 grid h-9 w-9 xs:h-10 xs:w-10 sm:h-12 sm:w-12 place-items-center rounded-full border transition-all duration-300 ${
                       isActive
                         ? 'border-[#E4032E] bg-[#E4032E] text-white shadow-[0_0_24px_rgba(228,3,46,0.65)]'
                         : 'border-slate-800 bg-[#090C15] text-slate-500'
@@ -261,7 +261,7 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
                         setActiveStep(index);
                       }
                     }}
-                    className={`group w-full rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/70 ${
+                    className={`group w-full rounded-2xl border p-3.5 xs:p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E4032E]/70 ${
                       isActive
                         ? 'border-[#E4032E] bg-gradient-to-r from-[#E4032E]/14 via-white/[0.065] to-white/[0.035] shadow-[0_14px_34px_rgba(228,3,46,0.18)]'
                         : 'border-white/10 bg-white/[0.035] hover:-translate-y-0.5 hover:border-[#E4032E]/70 hover:bg-white/[0.055] hover:shadow-[0_12px_28px_rgba(228,3,46,0.12)]'
@@ -282,7 +282,7 @@ export const WorkflowTimeline: React.FC<WorkflowTimelineProps> = ({ cms }) => {
                         </p>
                       </div>
 
-                      <div className="flex shrink-0 items-center justify-between gap-3 sm:min-w-[250px]">
+                      <div className="flex shrink-0 items-center justify-between gap-2.5 sm:gap-3 w-full sm:w-auto sm:min-w-[250px] pt-2 sm:pt-0 border-t border-white/5 sm:border-t-0">
                         <div className="flex flex-wrap gap-1.5">
                           {item.deliverables.slice(0, 2).map((tag: string) => (
                             <span

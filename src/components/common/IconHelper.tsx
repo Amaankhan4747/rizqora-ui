@@ -13,6 +13,6 @@ export const IconHelper: React.FC<IconHelperProps> = ({
   size = 20,
 }) => {
   // @ts-ignore
-  const IconComponent = Icons[name] || Icons.Globe;
+  const IconComponent = Icons[name] || Icons.Sparkles;
   return <IconComponent className={className} size={size} />;
 };

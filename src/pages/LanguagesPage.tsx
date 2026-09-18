@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { PageId } from '../types';
 import { COMPREHENSIVE_LANGUAGES, REGION_CATEGORIES, SCRIPT_CATEGORIES } from '../data/languagesData';
 import { getScriptFontClass } from '../utils/languageHelpers';
-import { Globe3D } from '../components/common/Globe3D';
 import {
   Search,
-  Globe,
+  Languages,
   Filter,
   CheckCircle2,
   ArrowRight,
   Sparkles,
   ArrowUpRight,
   RotateCcw,
-  SlidersHorizontal
+  SlidersHorizontal,
+  ShieldCheck,
+  Cpu,
+  Layers,
+  Check
 } from 'lucide-react';
 
 interface LanguagesPageProps {
@@ -108,38 +111,147 @@ export const LanguagesPage: React.FC<LanguagesPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Interactive Globe & Explorer Overview Section */}
-      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-          <div className="lg:col-span-6 space-y-6">
+      {/* Enterprise Linguistic Intelligence & Explorer Overview Section */}
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             <span className="text-xs font-bold uppercase tracking-wider text-[#E4032E]">
               AUTHENTIC SCRIPT RENDERING & LOCALIZATION
             </span>
-            <h2 className="text-3xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
               Seamless Multilingual Bridge Across Continents
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
               Every language pair in our catalog is backed by ISO 17100 certified workflows, continuous NMT engine retraining, and domain-expert native proofreaders for flawless contextual resonance.
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 pt-1 sm:pt-2">
+              <div className="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200">
                 <div className="text-2xl sm:text-3xl font-black text-[#E4032E] font-['Space_Grotesk']">150+</div>
-                <div className="text-xs font-bold text-slate-700 mt-1">Global Languages</div>
+                <div className="text-[11px] sm:text-xs font-bold text-slate-700 mt-1">Global Languages</div>
               </div>
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+              <div className="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200">
                 <div className="text-2xl sm:text-3xl font-black text-[#141414] font-['Space_Grotesk']">950+</div>
-                <div className="text-xs font-bold text-slate-700 mt-1">Active Pairs</div>
+                <div className="text-[11px] sm:text-xs font-bold text-slate-700 mt-1">Active Pairs</div>
               </div>
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 col-span-2 sm:col-span-1">
+              <div className="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200 col-span-2 sm:col-span-1">
                 <div className="text-2xl sm:text-3xl font-black text-emerald-600 font-['Space_Grotesk']">99.2%</div>
-                <div className="text-xs font-bold text-slate-700 mt-1">Avg Accuracy</div>
+                <div className="text-[11px] sm:text-xs font-bold text-slate-700 mt-1">Avg Accuracy</div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-6">
-            <Globe3D />
+          {/* Enterprise Script Verification & Linguistic Architecture Panel (Replaces Globe) */}
+          <div className="lg:col-span-6 w-full">
+            <div className="relative rounded-3xl bg-[#080B13] border border-slate-800 p-5 sm:p-7 shadow-2xl overflow-hidden text-white">
+              {/* Subtle Ambient Red Light Gradient */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+              {/* Subtle Tech Grid Accent */}
+              <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{
+                  backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+                  backgroundSize: '20px 20px',
+                }}
+              />
+
+              <div className="relative z-10 space-y-5">
+                {/* Header Strip */}
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="font-mono text-[10px] sm:text-xs text-emerald-400 font-bold uppercase tracking-wider">
+                      SCRIPT ENGINE v4.2 • ACTIVE
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-slate-400 bg-white/[0.05] border border-white/10 px-2.5 py-0.5 rounded-full">
+                    ISO 17100 VERIFIED
+                  </span>
+                </div>
+
+                {/* 4 Multi-Script Processing Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-red-500/40 transition-colors">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono text-[#E4032E] font-bold">LATIN / ROMAN</span>
+                      <span className="text-emerald-400 font-mono">100% SLA</span>
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white font-['Space_Grotesk']">
+                      Sub-Pixel Typography
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+                      EN • ES • FR • DE • PT • IT
+                    </div>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-red-500/40 transition-colors">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono text-[#E4032E] font-bold">ARABIC & NASTALIQ</span>
+                      <span className="text-emerald-400 font-mono">Bi-Di RTL</span>
+                    </div>
+                    <div dir="rtl" className="text-xs sm:text-sm font-bold text-white font-['Amiri']">
+                      دقة لغوية متكاملة
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+                      AR • UR • FA • PS (Full RTL Flow)
+                    </div>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-red-500/40 transition-colors">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono text-[#E4032E] font-bold">INDIC / DEVANAGARI</span>
+                      <span className="text-emerald-400 font-mono">Unicode 15</span>
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white font-['Noto_Sans_Devanagari']">
+                      शुद्ध भाषाई सटीकता
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+                      HI • MR • BN • TA • TE
+                    </div>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-red-500/40 transition-colors">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono text-[#E4032E] font-bold">CJK IDEOGRAPHS</span>
+                      <span className="text-emerald-400 font-mono">Multi-byte</span>
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white font-['Noto_Sans_SC']">
+                      超高精度ローカリゼーション
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+                      ZH • JA • KO (Complex Glyphs)
+                    </div>
+                  </div>
+                </div>
+
+                {/* Technical Metric Specs Strip */}
+                <div className="pt-3 border-t border-slate-800/80 grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2 rounded-lg bg-black/40 border border-white/5">
+                    <div className="font-mono text-xs sm:text-sm font-bold text-white">42.8+</div>
+                    <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase">BLEU Score</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-black/40 border border-white/5">
+                    <div className="font-mono text-xs sm:text-sm font-bold text-emerald-400">&lt;0.08%</div>
+                    <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase">MQM Margin</div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-black/40 border border-white/5">
+                    <div className="font-mono text-xs sm:text-sm font-bold text-[#E4032E]">99.8%</div>
+                    <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase">Delivery SLA</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 pt-1">
+                  <span className="flex items-center gap-1 text-slate-300">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#E4032E]" />
+                    Enterprise Security & Quality Guaranteed
+                  </span>
+                  <span className="font-mono text-slate-500">24/7 Global Engine</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -282,7 +394,7 @@ export const LanguagesPage: React.FC<LanguagesPageProps> = ({ onNavigate }) => {
         {/* Empty State */}
         {filteredLanguages.length === 0 && (
           <div className="py-16 text-center bg-slate-50 rounded-3xl border border-slate-200 p-8 space-y-3">
-            <Globe className="w-10 h-10 text-slate-400 mx-auto" />
+            <Languages className="w-10 h-10 text-slate-400 mx-auto" />
             <h3 className="text-lg font-bold text-slate-800 font-['Space_Grotesk']">
               No exact language match found
             </h3>
@@ -373,7 +485,7 @@ export const LanguagesPage: React.FC<LanguagesPageProps> = ({ onNavigate }) => {
         {/* Dialect Capability Banner */}
         <div className="mt-14 text-center p-8 sm:p-10 bg-slate-50 rounded-3xl border border-slate-200 space-y-4">
           <div className="w-10 h-10 rounded-xl bg-red-50 text-[#E4032E] flex items-center justify-center mx-auto">
-            <Globe className="w-5 h-5" />
+            <Languages className="w-5 h-5" />
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-[#141414] font-['Space_Grotesk']">
             Need a rare regional dialect or custom language combination?

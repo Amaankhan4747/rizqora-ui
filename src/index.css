@@ -13,6 +13,21 @@
   animation: marquee 35s linear infinite;
 }
 
+/* Hide scrollbar utility for touch sliders */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 /* Script-aware font fallbacks for multilingual precision */
 .font-script-arabic {
   font-family: 'Noto Sans Arabic', 'Amiri', 'Traditional Arabic', 'Segoe UI', Tahoma, sans-serif;

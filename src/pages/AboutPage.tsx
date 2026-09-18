@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
 import { OFFICE_LOCATIONS } from '../data/mockData';
-import { Globe2, ShieldCheck, Award, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { Languages, ShieldCheck, Award, Users, ArrowRight, Sparkles } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -22,7 +22,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       title: 'Global Cultural Reach',
       desc: 'Language is more than literal translation—it is cultural nuance, trust, and regional authenticity across 1,000+ languages.',
-      icon: Globe2,
+      icon: Languages,
     },
     {
       title: 'Enterprise Partnership',
@@ -106,7 +106,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               Global Reach & Operations
             </h3>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Headquartered in San Francisco with major hub offices in London, Tokyo, Dubai, and Singapore, our operational footprint ensures round-the-clock 24/7 project management and support.
+              Headquartered at Aravalli Mall, Udaipur, Rajasthan, India, our global operational footprint ensures round-the-clock 24/7 enterprise project management, localization, and support.
             </p>
             <div className="space-y-3 pt-2">
               {OFFICE_LOCATIONS.map((office) => (

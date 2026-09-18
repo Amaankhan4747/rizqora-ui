@@ -327,7 +327,7 @@ export const Globe3D: React.FC<Globe3DProps> = ({
   }, [allFailed, isVideo, currentSrc]);
 
   return (
-    <div className={`relative w-full aspect-square max-w-[310px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[620px] xl:max-w-[660px] mx-auto flex items-center justify-center select-none ${className}`}>
+    <div className={`relative w-full aspect-square max-w-[250px] xs:max-w-[290px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[620px] xl:max-w-[660px] mx-auto flex items-center justify-center select-none ${className}`}>
       {/* Globe Media Visual Container - Transparent, no black background disc */}
       <div className="w-full h-full flex items-center justify-center relative">
         {!allFailed && currentSrc ? (

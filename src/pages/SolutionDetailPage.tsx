@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   ShieldCheck,
   Zap,
-  Globe2,
+  Layers,
   Clock,
 } from 'lucide-react';
 
@@ -57,8 +57,8 @@ export const SolutionDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Hero Section with Background Image Capability & Gradient Fallback */}
-      <section className="bg-slate-900 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
+      {/* Hero Section with Background Image & Simple Solid Dark Treatment */}
+      <section className="bg-[#0D0D0D] text-white py-16 sm:py-20 relative overflow-hidden">
         {/* Background Image layer referencing public path: /images/solutions/enterprise-language-solution.jpg */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
@@ -67,11 +67,9 @@ export const SolutionDetailPage: React.FC = () => {
           }}
         />
 
-        {/* Subtle Dark Overlay ensuring text remains completely readable */}
-        <div className="absolute inset-0 bg-slate-950/75 sm:bg-slate-950/70 pointer-events-none" />
+        {/* Subtle Dark Overlay ensuring the image is clearly visible while text remains readable */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
-        {/* Existing Red Ambient Radial Glow */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#E4032E]/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs font-bold text-[#E4032E] uppercase tracking-wider">
@@ -184,7 +182,7 @@ export const SolutionDetailPage: React.FC = () => {
             <div className="p-8 rounded-3xl bg-white border border-slate-200/80 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center">
-                  <Globe2 className="w-5 h-5 text-[#E4032E]" />
+                  <Layers className="w-5 h-5 text-[#E4032E]" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-[#141414] font-['Space_Grotesk']">

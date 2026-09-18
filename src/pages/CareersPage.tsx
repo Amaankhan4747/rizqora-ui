@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageId, JobPosition } from '../types';
 import { OPEN_POSITIONS } from '../data/mockData';
-import { Briefcase, Globe, CheckCircle2, ArrowRight, UserPlus, Send, X } from 'lucide-react';
+import { Briefcase, Laptop, CheckCircle2, ArrowRight, UserPlus, Send, X } from 'lucide-react';
 
 interface CareersPageProps {
   onNavigate: (page: PageId, detailId?: string) => void;
@@ -49,7 +49,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-            <Globe className="w-6 h-6 text-[#E4032E]" />
+            <Laptop className="w-6 h-6 text-[#E4032E]" />
             <h3 className="text-base font-bold text-[#141414] font-['Space_Grotesk']">100% Remote-First Culture</h3>
             <p className="text-xs text-slate-600">Work from anywhere in the world with flexible hours and global team collaboration.</p>
           </div>
