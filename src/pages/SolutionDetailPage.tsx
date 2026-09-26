@@ -209,39 +209,41 @@ export const SolutionDetailPage: React.FC = () => {
 
           {/* Right 4 Cols: SLA, Quick Quote & Related Solutions */}
           <div className="lg:col-span-4 space-y-6">
-            {/* SLA Card */}
-            <div className="p-6 rounded-3xl bg-[#090C15] text-white border border-slate-800 shadow-xl space-y-5">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#E4032E] uppercase tracking-wider">
-                <Clock className="w-4 h-4" />
-                <span>Enterprise SLA & Specs</span>
-              </div>
+            {/* SLA Card (Shown for linguistic solutions, hidden on Web/App Development) */}
+            {service.id !== 'web-development' && service.id !== 'app-development' && (
+              <div className="p-6 rounded-3xl bg-[#090C15] text-white border border-slate-800 shadow-xl space-y-5">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#E4032E] uppercase tracking-wider">
+                  <Clock className="w-4 h-4" />
+                  <span>Enterprise SLA & Specs</span>
+                </div>
 
-              <div className="space-y-3 divide-y divide-slate-800 text-xs">
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-slate-400">Turnaround Speed</span>
-                  <span className="font-bold text-white">Same-Day / 24h SLA</span>
+                <div className="space-y-3 divide-y divide-slate-800 text-xs">
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-slate-400">Turnaround Speed</span>
+                    <span className="font-bold text-white">Same-Day / 24h SLA</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-slate-400">Quality Framework</span>
+                    <span className="font-bold text-emerald-400">ISO 17100 / MQM Certified</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-slate-400">Language Coverage</span>
+                    <span className="font-bold text-white">1,000+ Pairs</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-slate-400">API Integration</span>
+                    <span className="font-bold text-white">REST, Webhooks, XLIFF</span>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-slate-400">Quality Framework</span>
-                  <span className="font-bold text-emerald-400">ISO 17100 / MQM Certified</span>
-                </div>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-slate-400">Language Coverage</span>
-                  <span className="font-bold text-white">1,000+ Pairs</span>
-                </div>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-slate-400">API Integration</span>
-                  <span className="font-bold text-white">REST, Webhooks, XLIFF</span>
-                </div>
-              </div>
 
-              <Link
-                to={`/quote?service=${service.id}`}
-                className="w-full block text-center bg-[#E4032E] hover:bg-[#c30226] text-white py-3 rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
-              >
-                Get Custom Pricing
-              </Link>
-            </div>
+                <Link
+                  to={`/quote?service=${service.id}`}
+                  className="w-full block text-center bg-[#E4032E] hover:bg-[#c30226] text-white py-3 rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
+                >
+                  Get Custom Pricing
+                </Link>
+              </div>
+            )}
 
             {/* Related Solutions */}
             <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-4">
