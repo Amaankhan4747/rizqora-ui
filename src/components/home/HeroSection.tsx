@@ -10,17 +10,56 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
-  const brandLogos = [
-    { name: 'Google', label: 'Google', color: 'hover:text-blue-600' },
-    { name: 'Microsoft', label: 'Microsoft', color: 'hover:text-cyan-600' },
-    { name: 'Airbnb', label: 'airbnb', color: 'hover:text-[#FF5A5F]' },
-    { name: 'Netflix', label: 'NETFLIX', color: 'hover:text-[#E50914]' },
-    { name: 'Uber', label: 'Uber', color: 'hover:text-[#000000]' },
-    { name: 'HP', label: 'hp', color: 'hover:text-sky-700' },
-    { name: 'Samsung', label: 'SAMSUNG', color: 'hover:text-blue-700' },
-    { name: 'Amazon', label: 'amazon', color: 'hover:text-amber-500' },
-    { name: 'Spotify', label: 'Spotify', color: 'hover:text-emerald-500' },
-    { name: 'Salesforce', label: 'salesforce', color: 'hover:text-sky-500' },
+  // Real Client Companies with custom brand colors, badges, and background accents
+  const clientBrands = [
+    {
+      name: 'AK DIGITAL WOLD',
+      iconLetter: 'AK',
+      colorHex: '#0284C7', // Electric Blue / Tech Sky
+      bgLight: '#F0F9FF',
+      borderColor: '#BAE6FD',
+      badge: 'Digital & Media',
+    },
+    {
+      name: 'WDT TECHNOLOGY',
+      iconLetter: 'WDT',
+      colorHex: '#6366F1', // Royal Violet / Indigo Tech
+      bgLight: '#EEF2FF',
+      borderColor: '#C7D2FE',
+      badge: 'Enterprise IT',
+    },
+    {
+      name: 'HEXFARE LIMITED',
+      iconLetter: 'HX',
+      colorHex: '#E11D48', // Corporate Crimson / Ruby
+      bgLight: '#FFF1F2',
+      borderColor: '#FECDD3',
+      badge: 'Global FinTech',
+    },
+    {
+      name: 'XENPARK SOLUTION',
+      iconLetter: 'XP',
+      colorHex: '#059669', // Emerald / Fresh Tech Mint
+      bgLight: '#ECFDF5',
+      borderColor: '#A7F3D0',
+      badge: 'Cloud Solutions',
+    },
+    {
+      name: 'WOLDMAP',
+      iconLetter: 'WM',
+      colorHex: '#D97706', // Global Amber / Gold
+      bgLight: '#FFFBEB',
+      borderColor: '#FDE68A',
+      badge: 'Geo Analytics',
+    },
+    {
+      name: 'TECHGURU INDIA',
+      iconLetter: 'TG',
+      colorHex: '#EA580C', // Vibrant Saffron / Warm Orange
+      bgLight: '#FFF7ED',
+      borderColor: '#FED7AA',
+      badge: 'Innovations India',
+    },
   ];
 
   return (
@@ -89,7 +128,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-[13px] sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-xl pr-0 xs:pr-24 sm:pr-0"
               >
-                Helping businesses communicate globally through Translation, Localization, Machine Translation Post-Editing (MTPE), Linguistic QA, AI Data Annotation, and Enterprise Content Solutions.
+                Helping businesses communicate and scale globally through Web & Mobile App Development, Translation, Localization, Machine Translation Post-Editing (MTPE), Linguistic QA, AI Data Annotation, and Enterprise Digital Solutions.
               </motion.p>
 
               {/* Cursive script "A More Connected World" per reference */}
@@ -145,16 +184,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
 
                 <div className="flex w-max overflow-hidden">
-                  <div className="flex items-center gap-10 sm:gap-14 animate-marquee group-hover/marquee:[animation-play-state:paused] pointer-events-auto">
-                    {[...brandLogos, ...brandLogos, ...brandLogos, ...brandLogos].map((brand, idx) => (
+                  <div className="flex items-center gap-6 sm:gap-8 animate-marquee group-hover/marquee:[animation-play-state:paused] pointer-events-auto">
+                    {[...clientBrands, ...clientBrands, ...clientBrands, ...clientBrands].map((brand, idx) => (
                       <div
                         key={`${brand.name}-${idx}`}
-                        className="flex items-center gap-2 cursor-pointer opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 transform hover:scale-110 hover:drop-shadow-[0_4px_12px_rgba(228,3,46,0.3)] shrink-0"
+                        className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-white border shadow-2xs hover:shadow-md transition-all duration-300 transform hover:scale-105 shrink-0 group/brand cursor-pointer"
+                        style={{
+                          borderColor: brand.borderColor,
+                        }}
                       >
+                        {/* Monogram Badge in Brand Color */}
                         <span
-                          className={`font-black text-lg sm:text-xl tracking-tight font-['Space_Grotesk'] ${brand.color}`}
+                          className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-black text-white shrink-0 shadow-2xs"
+                          style={{ backgroundColor: brand.colorHex }}
                         >
-                          {brand.label}
+                          {brand.iconLetter}
+                        </span>
+                        <span
+                          className="font-black text-sm sm:text-base tracking-tight font-['Space_Grotesk']"
+                          style={{ color: brand.colorHex }}
+                        >
+                          {brand.name}
+                        </span>
+                        <span className="hidden sm:inline-block text-[9px] font-semibold text-slate-400 uppercase tracking-wider pl-1 border-l border-slate-200">
+                          {brand.badge}
                         </span>
                       </div>
                     ))}
@@ -382,20 +435,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             <div className="flex-1 h-px bg-slate-200" />
           </div>
 
-          {/* Clean Rounded Brand Logo Card (Samsung, Amazon, Spotify, Salesforce) per reference design */}
-          <div className="bg-white/95 rounded-2xl border border-slate-200/80 shadow-xs px-3 py-3 flex items-center justify-between gap-2 overflow-x-auto">
-            <span className="font-black text-xs xs:text-sm tracking-tight font-['Space_Grotesk'] text-slate-700 uppercase">
-              SAMSUNG
-            </span>
-            <span className="font-black text-xs xs:text-sm tracking-tight font-['Space_Grotesk'] text-slate-800 lowercase">
-              amazon
-            </span>
-            <span className="font-black text-xs xs:text-sm tracking-tight font-['Space_Grotesk'] text-slate-800">
-              Spotify<span className="text-[8px] align-super">®</span>
-            </span>
-            <span className="font-black text-xs xs:text-sm tracking-tight font-['Space_Grotesk'] text-slate-800 lowercase">
-              salesforce
-            </span>
+          {/* Clean Rounded Brand Logo Card featuring the 6 Client Companies with Distinct Brand Colors (Running Marquee Only) */}
+          <div className="bg-white/95 rounded-2xl border border-slate-200/80 shadow-xs px-2 py-3 overflow-hidden">
+            {/* Smooth animated scrolling ticker on mobile with edge fades */}
+            <div className="relative w-full overflow-hidden py-0.5 group/mobileMarquee">
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+              
+              <div className="flex w-max overflow-hidden">
+                <div className="flex items-center gap-3 animate-marquee group-hover/mobileMarquee:[animation-play-state:paused]">
+                  {[...clientBrands, ...clientBrands, ...clientBrands, ...clientBrands].map((brand, idx) => (
+                    <div
+                      key={`mob-ticker-${brand.name}-${idx}`}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-xl border shrink-0 shadow-2xs"
+                      style={{
+                        backgroundColor: brand.bgLight,
+                        borderColor: brand.borderColor,
+                      }}
+                    >
+                      <span
+                        className="w-5 h-5 rounded-md text-[9px] font-black text-white flex items-center justify-center shrink-0 shadow-2xs"
+                        style={{ backgroundColor: brand.colorHex }}
+                      >
+                        {brand.iconLetter}
+                      </span>
+                      <span
+                        className="font-black text-xs tracking-tight font-['Space_Grotesk'] whitespace-nowrap"
+                        style={{ color: brand.colorHex }}
+                      >
+                        {brand.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 

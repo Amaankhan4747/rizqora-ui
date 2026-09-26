@@ -80,10 +80,10 @@ export const ServicesGrid: React.FC<ServicesGridProps> = () => {
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
-              End-to-End Language Solutions Powered by AI
+              End-to-End Digital, App & Language Solutions
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Accurate, culturally nuanced, and scalable language infrastructure for global enterprises.
+              Robust web applications, mobile engineering, and culturally nuanced AI language infrastructure for global enterprises.
             </p>
           </div>
 

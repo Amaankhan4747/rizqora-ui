@@ -66,6 +66,62 @@ export const SERVICES_DATA: ServiceItem[] = [
     isPrimary8: true,
   },
   {
+    id: 'web-development',
+    name: 'Web Development',
+    oneLineDesc: 'Modern, responsive, high-performance web applications',
+    fullDesc:
+      'Full-stack enterprise web development engineered for global scalability, speed, and cross-browser responsiveness. From progressive web apps and custom corporate portals to high-converting global e-commerce platforms with multilingual internationalization (i18n) baked in.',
+    iconName: 'Code',
+    image:
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80',
+    features: [
+      'Modern Frontend Frameworks (React, Next.js, TypeScript)',
+      'Robust Cloud Backend & REST/GraphQL API Architecture',
+      'Built-in Multilingual i18n & Global SEO Optimization',
+      'Responsive, Mobile-First & WCAG Accessible Design',
+    ],
+    benefits: [
+      'Sub-second page load times with 99.9% uptime reliability',
+      'Seamlessly localized for international markets and currencies',
+      'Scalable cloud infrastructure supporting millions of users',
+    ],
+    useCases: [
+      'Global Corporate & Enterprise Web Platforms',
+      'Multilingual E-Commerce & Marketplace Systems',
+      'Custom SaaS Dashboards & Client Portals',
+      'High-Performance Progressive Web Apps (PWA)',
+    ],
+    isPrimary8: true,
+  },
+  {
+    id: 'app-development',
+    name: 'App Development',
+    oneLineDesc: 'Native & cross-platform iOS and Android mobile applications',
+    fullDesc:
+      'End-to-end mobile application design and engineering for iOS, Android, and cross-platform ecosystems. We craft intuitive user experiences, robust offline-first synchronization, secure API integrations, and internationalized mobile architectures ready for global app store deployment.',
+    iconName: 'Smartphone',
+    image:
+      'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80',
+    features: [
+      'Native iOS (Swift) & Android (Kotlin) Development',
+      'Cross-Platform Solutions (Flutter & React Native)',
+      'Offline-First Sync & Biometric Security Protocols',
+      'Multilingual App Store Optimization (ASO) & Localization',
+    ],
+    benefits: [
+      'Consistent 60 FPS performance and native UI responsiveness',
+      '40% faster time-to-market with cross-platform shared codebases',
+      'Global App Store and Google Play compliant launch',
+    ],
+    useCases: [
+      'Enterprise Mobile ERP & Field Workforce Apps',
+      'B2C Consumer & On-Demand Service Applications',
+      'FinTech & Healthcare Secure Mobile Solutions',
+      'Multilingual Mobile E-Commerce & Loyalty Apps',
+    ],
+    isPrimary8: true,
+  },
+  {
     id: 'ai-data-annotation',
     name: 'AI Data Annotation',
     oneLineDesc: 'High-quality multilingual data for AI models',

@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
               Solutions
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              {SERVICES_DATA.slice(0, 6).map((s) => (
+              {SERVICES_DATA.slice(0, 8).map((s) => (
                 <li key={s.id}>
                   <Link
                     to={`/solutions/${getServiceSlug(s.id)}`}
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
               ))}
               <li>
                 <Link to="/solutions" className="text-[#E4032E] font-semibold flex items-center gap-1 pt-1">
-                  All 10 Solutions <ArrowRight className="w-3 h-3" />
+                  All 12 Solutions <ArrowRight className="w-3 h-3" />
                 </Link>
               </li>
             </ul>

@@ -244,7 +244,7 @@ export const GetQuotePage: React.FC<GetQuotePageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {SERVICES_DATA.slice(0, 6).map((srv) => {
+                    {SERVICES_DATA.map((srv) => {
                       const isSelected = selectedService === srv.name;
                       return (
                         <button

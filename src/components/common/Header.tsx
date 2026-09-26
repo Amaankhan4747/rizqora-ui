@@ -93,10 +93,10 @@ export const Header: React.FC = () => {
               </Link>
 
               {solutionsHovered && (
-                <div className="absolute top-full left-0 w-[540px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 grid grid-cols-2 gap-2">
+                <div className="absolute top-full left-0 w-[560px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 grid grid-cols-2 gap-2">
                   <div className="col-span-2 pb-2 mb-2 border-b border-slate-100 flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#E4032E]">
-                      Enterprise Language Services
+                      Enterprise Services & Solutions
                     </span>
                     <Link
                       to="/solutions"
@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
                       All Services <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
-                  {SERVICES_DATA.slice(0, 6).map((srv) => (
+                  {SERVICES_DATA.slice(0, 8).map((srv) => (
                     <Link
                       key={srv.id}
                       to={`/solutions/${getServiceSlug(srv.id)}`}
@@ -123,14 +123,14 @@ export const Header: React.FC = () => {
                   ))}
                   <div className="col-span-2 mt-2 pt-2 bg-slate-50 p-2.5 rounded-lg flex items-center justify-between">
                     <span className="text-xs text-slate-600 font-medium">
-                      Looking for custom AI dataset annotation?
+                      Need custom Web or Mobile App Development?
                     </span>
                     <Link
-                      to="/solutions/ai-data-annotation"
+                      to="/quote"
                       onClick={closeMenus}
                       className="text-xs font-bold text-[#E4032E] hover:underline"
                     >
-                      Explore AI Solutions →
+                      Request a Quote →
                     </Link>
                   </div>
                 </div>

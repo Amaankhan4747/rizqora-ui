@@ -21,15 +21,15 @@ export const ServicesPage: React.FC = () => {
             FULL SERVICES CATALOG
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#141414] tracking-tight font-['Space_Grotesk']">
-            Comprehensive Enterprise Language & AI Solutions
+            Comprehensive Digital, Mobile & Language Solutions
           </h1>
           <p className="text-base text-slate-600 leading-relaxed">
-            All 10 specialized language solutions engineered to help global businesses communicate effortlessly across international markets.
+            All 12 specialized web development, mobile app, and enterprise language AI solutions engineered to help global businesses build, scale, and communicate effortlessly across international markets.
           </p>
         </div>
       </section>
 
-      {/* Services Grid (All 10 Services) */}
+      {/* Services Grid (All 12 Solutions) */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES_DATA.map((service) => (
