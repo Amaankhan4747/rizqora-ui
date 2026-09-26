@@ -110,6 +110,9 @@ export default function App() {
     } else if (page === 'languages') {
       if (detailId) navigate(`/languages/${detailId}`);
       else navigate('/languages');
+    } else if (page === 'quote') {
+      if (detailId) navigate(`/quote?service=${detailId}`);
+      else navigate('/quote');
     } else {
       navigate(`/${page}`);
     }

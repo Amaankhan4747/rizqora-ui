@@ -97,7 +97,7 @@ export const SolutionDetailPage: React.FC = () => {
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link
-                to="/quote"
+                to={`/quote?service=${service.id}`}
                 className="bg-[#E4032E] hover:bg-[#c30226] text-white px-7 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-red-600/30 flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
               >
                 <span>Request {service.name} Quote</span>
@@ -236,7 +236,7 @@ export const SolutionDetailPage: React.FC = () => {
               </div>
 
               <Link
-                to="/quote"
+                to={`/quote?service=${service.id}`}
                 className="w-full block text-center bg-[#E4032E] hover:bg-[#c30226] text-white py-3 rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
               >
                 Get Custom Pricing
