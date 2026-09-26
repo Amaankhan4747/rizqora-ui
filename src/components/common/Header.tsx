@@ -65,7 +65,7 @@ export const Header: React.FC = () => {
             aria-label="Rizqoraa Home"
           >
             <RizqoraaLogo
-              height={40}
+              height={55}
               variant="light"
               className="scale-[1.22] xs:scale-[1.35] sm:scale-[1.52] origin-left group-hover:opacity-95 transition-opacity"
             />

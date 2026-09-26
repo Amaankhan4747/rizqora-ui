@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SERVICES_DATA, INDUSTRIES_DATA } from '../../data/mockData';
 import { Mail, Phone, MapPin, Linkedin, Twitter, ArrowRight, MessageSquare } from 'lucide-react';
-import { RizqoraaLogo } from './RizqoraaLogo';
-
 export const Footer: React.FC = () => {
   const getServiceSlug = (id: string) => (id === 'lqa' ? 'linguistic-quality-assurance' : id);
 
@@ -20,11 +18,10 @@ export const Footer: React.FC = () => {
               aria-label="Rizqoraa Home"
             >
               <img
-                src="/rizqoraa-footer-logo.png"
-                alt="Rizqoraa Solutions - Connecting Every Language, Powering Global Business"
-                decoding="async"
-                className="h-9 sm:h-12 w-auto max-w-[240px] xs:max-w-[280px] sm:max-w-[320px] object-contain select-none transition-transform duration-200 group-hover:scale-[1.02]"
-              />
+  src="/rizqoraa-footer-logo.png"
+  alt="Rizqoraa Solutions"
+  className="h-[55px] w-auto scale-[1.22] xs:scale-[1.35] sm:scale-[1.52] origin-left group-hover:opacity-95 transition-opacity"
+/>
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
